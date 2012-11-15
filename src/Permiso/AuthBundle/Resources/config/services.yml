@@ -1,0 +1,7 @@
+parameters:
+#    permiso_auth.example.class: Permiso\AuthBundle\Example
+
+services:
+#    permiso_auth.example:
+#        class: %permiso_auth.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
