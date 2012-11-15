@@ -1,0 +1,17 @@
+{# /src/MDW/DemoBundle/views/layout.html.twig #}
+{% extends '::base.html.twig'  %} {# extendemos del layout por defecto #}
+
+{% block javascripts %}
+{# añadimos la CDN de jQuery o en su defecto lo descargamos e incluimos con:
+<script src="{{ asset('js/jquery-1.7.2.min.js') }}"></script>#}
+<script src="{{ asset('js/jquery-1.8.2.js') }}"></script>
+{% endblock javascripts %}
+
+{# creamos una estructura para el layout general #}
+{% block body %}
+<div>
+    <h1>Bienvenido a la gestoría de permisos</h1>
+    {# según el patrón de 3 niveles, creamos el bloque de contenido #}
+    {% block content %}{% endblock content %}
+</div>
+{% endblock body%}
