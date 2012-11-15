@@ -147,11 +147,17 @@ class Usuario implements UserInterface
     {
         return $this->password;
     }
-
+    
     public function getRoles() 
     {
-        return $this->roles->toArray();
-    }
+        //return $this->roles->toArray();
+        $roles = array();
+        foreach ($this->roles as $role) {
+        $roles[] = $role->getRole();
+        }
+
+        return $roles;
+        }
     
     public function eraseCredentials() {
         

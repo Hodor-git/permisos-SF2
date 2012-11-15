@@ -58,6 +58,6 @@ class Rol implements RoleInterface
     
     public function getRole() 
     {
-       return $this->nombre; 
+       return $this->getNombre(); 
     }
 }
