@@ -5,4 +5,3 @@ permiso_auth_homepage:
 usuario_registrado:
   pattern: /registrar
   defaults: { _controller: PermisoAuthBundle:Security:registrarUsuario }
-  

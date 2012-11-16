@@ -65,4 +65,25 @@ class SecurityController extends Controller
         $entity = $em->getRepository('PermisoAuthBundle:Usuario')->find(1);
         return $this->render('PermisoAuthBundle:Security:exito.html.twig', array('nombre' => $entity->getUsuario));
     }
+    
+    public function loginHelperAction()
+    {
+        $usuario = $this->getUser();
+        
+        if(is_null($usuario)) {
+            $usuario = 'invitado';
+            
+            return $this->render('PermisoAuthBundle:Security:nologin.html.twig');
+        } else {
+            return $this->render('PermisoAuthBundle:Security:loggued.html.twig', array ('usuario' => $usuario));
+        }
+    }
+    
+    public function logoutAction()
+    {
+        $this->get('security.context')->setToken(null); 
+        $this->get('request')->getSession()->invalidate();
+        
+        return $this->render('PermisoAuthBundle:Security:logout.html.twig');
+    }
 }

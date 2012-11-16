@@ -9,7 +9,9 @@
 
         <div id="header">
             <h1>Bienvenido a la gestoría de permisos</h1>
-        </div>
+            <div id="loginbar">
+            {% render "PermisoAuthBundle:Security:loginHelper" %}
+            </div>
         <div id="content" class="clean" >
             <div id="content_left">
                 {% block content %}
