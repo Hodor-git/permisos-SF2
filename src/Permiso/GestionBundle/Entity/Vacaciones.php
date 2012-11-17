@@ -14,9 +14,30 @@ use Permiso\GestionBundle\Entity\Solicitud;
 class Vacaciones extends Solicitud
 {
     /**
-     * @ORM\Column(name="dias_pedidos", type="int")
+     * @ORM\Column(name="dias_pedidos", type="integer")
      */
     private $diasPedidos;
+
+    /**
+     * Set diasPedidos
+     *
+     * @param integer $diasPedidos
+     * @return Vacaciones
+     */
+    public function setDiasPedidos($diasPedidos)
+    {
+        $this->diasPedidos = $diasPedidos;
+    
+        return $this;
+    }
+
+    /**
+     * Get diasPedidos
+     *
+     * @return integer 
+     */
+    public function getDiasPedidos()
+    {
+        return $this->diasPedidos;
+    }
 }
-
-

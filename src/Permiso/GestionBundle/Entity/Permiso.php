@@ -18,6 +18,27 @@ class Permiso extends Solicitud
      * @return integer
      */
     private $tipoPermiso;
+
+    /**
+     * Set tipoPermiso
+     *
+     * @param Permiso\GestionBundle\Entity\TipoPermiso $tipoPermiso
+     * @return Permiso
+     */
+    public function setTipoPermiso(\Permiso\GestionBundle\Entity\TipoPermiso $tipoPermiso = null)
+    {
+        $this->tipoPermiso = $tipoPermiso;
+    
+        return $this;
+    }
+
+    /**
+     * Get tipoPermiso
+     *
+     * @return Permiso\GestionBundle\Entity\TipoPermiso 
+     */
+    public function getTipoPermiso()
+    {
+        return $this->tipoPermiso;
+    }
 }
-
-
