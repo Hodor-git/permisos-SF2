@@ -1,0 +1,7 @@
+parameters:
+#    permiso_gestion.example.class: Permiso\GestionBundle\Example
+
+services:
+#    permiso_gestion.example:
+#        class: %permiso_gestion.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,3 +1,7 @@
+permiso_gestion:
+    resource: "@PermisoGestionBundle/Resources/config/routing.yml"
+    prefix:   /
+
 permiso_auth:
     resource: "@PermisoAuthBundle/Resources/config/routing.yml"
     prefix:   /
