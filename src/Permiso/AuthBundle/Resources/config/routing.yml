@@ -1,5 +1,5 @@
 permiso_auth_homepage:
-    pattern:  /auth
+    pattern:  /
     defaults: { _controller: PermisoAuthBundle:Default:index }
     
 usuario_registrado:
