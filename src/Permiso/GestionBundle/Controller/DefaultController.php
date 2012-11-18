@@ -7,12 +7,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Permiso\GestionBundle\Entity\Vacaciones;
 use Permiso\GestionBundle\Entity\TipoPermiso;
 use Permiso\GestionBundle\Entity\Permiso;
+use Permiso\GestionBundle\Entity\Gestor;
+use Permiso\GestionBundle\Entity\Categoria;
+use Permiso\GestionBundle\Entity\Empleado;
 
 class DefaultController extends Controller
 {
     public function indexAction()
     {
-        
+        /*
         $vacaciones  = new Vacaciones;
         
         $hoy = new \DateTime("now");
@@ -27,9 +30,35 @@ class DefaultController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($vacaciones);
-        $em->flush(); 
+        $em->flush();*/
         
-        return $this->render('PermisoGestionBundle:Default:index.html.twig', array());
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        $categoria = new Categoria();
+        
+        $categoria->setNombre('empleado');
+        $categoria->setDiasVacaciones(20);
+        
+        $gestor = $em->getRepository('PermisoGestionBundle:Gestor');
+        
+        $pepito = $gestor->findBy(array('username' => 'pepe'));
+        
+        
+        $manolo = new Empleado();
+        
+        $manolo->setUsername('manolo');
+        $manolo->setPassword('gafotas');
+        $manolo->setSalt('asd312asdas23');
+        $manolo->setEmail('manolo@lolailo.com');
+        $manolo->setCategoria($categoria);
+        $manolo->setGestor($pepito[0]);
+        
+        $em->persist($categoria);
+        $em->persist($manolo);
+        
+        $em->flush();
+        
+        return $this->render('PermisoGestionBundle:Default:index.html.twig'); /*, array('gestor' => var_dump($pepito)*/
     }
     
     public function permisoAction()
