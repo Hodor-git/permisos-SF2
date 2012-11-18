@@ -1,3 +1,9 @@
 permiso_gestion_homepage:
-    pattern:  /hello/{name}
+    pattern:  /vacaciones
     defaults: { _controller: PermisoGestionBundle:Default:index }
+    
+permiso_homepage:
+    pattern:  /permiso
+    defaults: { _controller: PermisoGestionBundle:Default:permiso }
+
+
