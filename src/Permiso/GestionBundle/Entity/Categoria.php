@@ -2,31 +2,36 @@
 
 namespace Permiso\GestionBundle\Entity;
  
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Role\RoleInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="categoria")
  */
-class Categoria 
+class Categoria implements RoleInterface
 {
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
     
     /**
      * @ORM\Column(name="nombre", type="string")
      */
-    private $nombre;
+    protected $nombre;
     
     /**
      * @ORM\Column(name="dias_vacaciones", type="integer")
      */
-    private $diasVacaciones;
+    protected $diasVacaciones;
+    
+    /**
+     * @ORM\Column(name="nombre_rol", type="string")
+     */
+    protected $nombreRol;
 
     /**
      * Get id
@@ -82,5 +87,33 @@ class Categoria
     public function getDiasVacaciones()
     {
         return $this->diasVacaciones;
+    }
+
+    /**
+     * Set nombreRol
+     *
+     * @param string $nombreRol
+     * @return Categoria
+     */
+    public function setNombreRol($nombreRol)
+    {
+        $this->nombreRol = $nombreRol;
+    
+        return $this;
+    }
+
+    /**
+     * Get nombreRol
+     *
+     * @return string 
+     */
+    public function getNombreRol()
+    {
+        return $this->nombreRol;
+    }
+    
+     public function getRole() 
+    {
+       return $this->getNombreRol(); 
     }
 }

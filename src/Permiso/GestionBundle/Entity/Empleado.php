@@ -15,51 +15,49 @@ use Doctrine\ORM\Mapping as ORM;
  * Define a map of keys and values (class names):
  * @ORM\DiscriminatorMap({"empleado" = "Empleado", "gestor" = "Gestor"})
  */
-class Empleado 
+class Empleado implements UserInterface
 {
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
     
     /**
      * @ORM\Column(name="username", type="string")
      */
-    private $username;
+    protected $username;
     
     /**
      * @ORM\Column(name="password", type="string")
      */
-    private $password;
+    protected $password;
     
     /**
      * @ORM\Column(name="salt", type="string", nullable=TRUE)
      */
-    private $salt;
+    protected $salt;
     
     /**
      * @ORM\Column(name="email", type="string")
      */
-    private $email;
+    protected $email;
     
     /**
      * @ORM\ManyToOne(targetEntity="Categoria")
      * @ORM\JoinColumn(name="categoria_id", referencedColumnName="id")
      * @return integer
      */
-    private $categoria;
+    protected $categoria;
     
     /**
      * @ORM\ManyToOne(targetEntity="Gestor")
      * @ORM\JoinColumn(name="gestor_id", referencedColumnName="id", nullable=TRUE)
      * @return integer
      */
-    private $gestor;
+    protected $gestor; 
     
-    
-
     /**
      * Get id
      *
@@ -206,5 +204,22 @@ class Empleado
     public function getGestor()
     {
         return $this->gestor;
+    }
+    
+    public function getRoles() 
+    {
+        $variable = $this->getCategoria()->getRole();
+        /*$roles = array();
+        foreach ($variable as $role) {
+        $roles[] = $role->getRole();
+        }*/
+        $roles[] = $variable;
+        return $roles;
+        //return $this->getCategoria()->getRole()->toArray();
+    }
+    
+    public function eraseCredentials() 
+    {
+        
     }
 }
