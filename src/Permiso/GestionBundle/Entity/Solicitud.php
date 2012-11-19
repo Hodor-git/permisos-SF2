@@ -200,20 +200,20 @@ class Solicitud
     }
     
     /**
-     * Set Empleado
+     * Set empleado
      *
      * @param Permiso\GestionBundle\Entity\Empleado $empleado
      * @return Solicitud
      */
     public function setEmpleado(\Permiso\GestionBundle\Entity\Empleado $empleado = null)
     {
-        $this->categoria = $categoria;
+        $this->empleado = $empleado;
     
         return $this;
     }
 
     /**
-     * Get categoria
+     * Get empleado
      *
      * @return Permiso\GestionBundle\Entity\Empleado 
      */
