@@ -16,7 +16,7 @@ class Permiso extends Solicitud
      * @ORM\JoinColumn(name="tipo_permiso_id", referencedColumnName="id")
      * @return integer
      */
-    private $tipoPermiso;
+    protected $tipoPermiso;
 
     /**
      * Set tipoPermiso
@@ -40,4 +40,4 @@ class Permiso extends Solicitud
     {
         return $this->tipoPermiso;
     }
-}
+    }

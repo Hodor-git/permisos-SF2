@@ -16,7 +16,7 @@ class Vacaciones extends Solicitud
     /**
      * @ORM\Column(name="dias_pedidos", type="integer")
      */
-    private $diasPedidos;
+    protected $diasPedidos;
 
     /**
      * Set diasPedidos

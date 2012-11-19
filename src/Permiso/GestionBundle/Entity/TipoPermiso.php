@@ -16,17 +16,17 @@ class TipoPermiso
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
     
     /**
      * @ORM\Column(name="nombre", type="string")
      */
-    private $nombre;
+    protected $nombre;
     
     /**
      * @ORM\Column(name="duracion", type="integer")
      */
-    private $duracion;
+    protected $duracion;
     
 
     /**

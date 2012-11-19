@@ -12,37 +12,44 @@ class Solicitud
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
     
     /**
      * @ORM\Column(name="fecha_entrada", type="date")
      */
-    private $fechaEntrada;
+    protected $fechaEntrada;
+    
+    /**
+     * @ORM\Column(name="fecha_inicio", type="date")
+     */
+    protected $fechaInicio;
     
     /**
      * @ORM\Column(name="fecha_gestion", type="date")
      */
-    private $fechaGestion;
+    protected $fechaGestion;
     
     /**
      * @ORM\Column(name="finalizada", type="boolean")
      */
-    private $finalizada;
+    protected $finalizada;
     
     /**
      * @ORM\Column(name="denegada", type="boolean")
      */
-    private $denegada;
+    protected $denegada;
     
     /**
      * @ORM\Column(name="observaciones", type="string", length=200)
      */
-    private $observaciones;
+    protected $observaciones;
     
     /**
-     * @ORM\Column(name="empleado_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Empleado")
+     * @ORM\JoinColumn(name="empleado_id", referencedColumnName="id")
+     * @return integer
      */
-    private $empleado;
+    protected $empleado;
 
     /**
      * Get id
@@ -76,7 +83,30 @@ class Solicitud
     {
         return $this->fechaEntrada;
     }
+    
+    /**
+     * Set fechaInicio
+     *
+     * @param \DateTime $fechaInicio
+     * @return Solicitud
+     */
+    public function setFechaInicio($fechaInicio)
+    {
+        $this->fechaInicio = $fechaInicio;
+    
+        return $this;
+    }
 
+    /**
+     * Get fechaInicio
+     *
+     * @return \DateTime 
+     */
+    public function getFechaInicio()
+    {
+        return $this->fechaInicio;
+    }
+    
     /**
      * Set fechaGestion
      *
@@ -168,27 +198,28 @@ class Solicitud
     {
         return $this->observaciones;
     }
-
+    
     /**
-     * Set empleado
+     * Set Empleado
      *
-     * @param integer $empleado
+     * @param Permiso\GestionBundle\Entity\Empleado $empleado
      * @return Solicitud
      */
-    public function setEmpleado($empleado)
+    public function setEmpleado(\Permiso\GestionBundle\Entity\Empleado $empleado = null)
     {
-        $this->empleado = $empleado;
+        $this->categoria = $categoria;
     
         return $this;
     }
 
     /**
-     * Get empleado
+     * Get categoria
      *
-     * @return integer 
+     * @return Permiso\GestionBundle\Entity\Empleado 
      */
     public function getEmpleado()
     {
-        return $this->empleado;
+        return $this->categoria;
     }
+    
 }

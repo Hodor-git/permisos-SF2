@@ -1,0 +1,9 @@
+{% extends 'PermisoAuthBundle::layout.html.twig' %}
+{% block content %}
+<form action="{{ path('nuevas_vacaciones') }}" method="post">
+    {{ form_widget(form) }}
+    <input type="submit" />
+</form>
+{% endblock %}
+
+

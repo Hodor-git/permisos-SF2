@@ -10,4 +10,7 @@ index_gestor:
   pattern: /gestor
   defaults: { _controller: PermisoGestionBundle:Default:gestor }
 
+nuevas_vacaciones:
+  pattern: /usuario/nuevas_vacaciones
+  defaults: { _controller: PermisoGestionBundle:Solicitud:solicitarVacaciones }
 
