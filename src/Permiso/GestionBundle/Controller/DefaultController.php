@@ -30,7 +30,7 @@ class DefaultController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($vacaciones);
-        $em->flush();*/
+        $em->flush();
         
         $em = $this->getDoctrine()->getEntityManager();
         
@@ -56,7 +56,7 @@ class DefaultController extends Controller
         $em->persist($categoria);
         $em->persist($manolo);
         
-        $em->flush();
+        $em->flush();*/
         
         return $this->render('PermisoGestionBundle:Default:index.html.twig'); /*, array('gestor' => var_dump($pepito)*/
     }
@@ -88,4 +88,16 @@ class DefaultController extends Controller
         
         return $this->render('PermisoGestionBundle:Default:index.html.twig', array());
     }
+    
+    public function inicioAction()
+    {
+        return $this->render('PermisoGestionBundle:Default:inicio.html.twig', array());
+    }
+    
+    
+    public function gestorAction()
+    {
+        return $this->render('PermisoGestionBundle:Default:gestor.html.twig', array());
+    }
+    
 }

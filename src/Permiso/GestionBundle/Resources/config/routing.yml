@@ -6,4 +6,8 @@ permiso_homepage:
     pattern:  /permiso
     defaults: { _controller: PermisoGestionBundle:Default:permiso }
 
+index_gestor:
+  pattern: /gestor
+  defaults: { _controller: PermisoGestionBundle:Default:gestor }
+
 

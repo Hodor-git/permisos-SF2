@@ -1,6 +1,6 @@
 _welcome:
     pattern:  /
-    defaults: { _controller: PermisoAuthBundle:Default:index }
+    defaults: { _controller: PermisoGestionBundle:Default:index }
 
 #_welcome:
 #    pattern:  /
