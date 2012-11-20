@@ -3,6 +3,7 @@
 namespace Permiso\GestionBundle\Entity;
  
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /** @ORM\MappedSuperclass */
 class Solicitud 
@@ -41,6 +42,7 @@ class Solicitud
     
     /**
      * @ORM\Column(name="observaciones", type="string", length=200)
+     * @Assert\MaxLength(limit = "200", message = "Máximo 200 caracteres")
      */
     protected $observaciones;
     

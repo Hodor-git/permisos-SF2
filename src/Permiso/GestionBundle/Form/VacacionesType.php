@@ -13,15 +13,15 @@ class VacacionesType extends AbstractType
                 'widget' => 'choice',
                 'format' => 'dd-MM-yyyy',
                 'years' => range(date('Y')+5, date('Y')),
-                'label' => 'Fecha de Inicio'
+                'label' => 'Fecha de Inicio:',
                 ))
-                ->add('observaciones')
-                ->add('diasPedidos', 'integer', array('rounding_mode' => 4, 'label' => 'Días Pedidos'));
+                ->add('observaciones', 'text')
+                ->add('diasPedidos', 'integer', array('label' => 'Días Pedidos:'));
         
     }
     
     public function getName()
     {
-        return 'vacaciones_form';
+        return 'vacaciones';
     }
 }

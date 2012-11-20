@@ -52,7 +52,7 @@ class SolicitudController extends Controller
             }
         }
         
-        return $this->render('PermisoGestionBundle:Solicitud:vacacionesForm.html.twig', array('form' => $form->createView(),));
+        return $this->render('PermisoGestionBundle:Solicitud:vacacionesForm.html.twig', array('form' => $form->createView()));
     }
    
 }
