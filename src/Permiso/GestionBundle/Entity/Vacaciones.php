@@ -9,8 +9,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Permiso\GestionBundle\Entity\Solicitud;
 
 /**
- * @ORM\Entity
  * @ORM\Table(name="vacaciones")
+ * @ORM\Entity(repositoryClass="Permiso\GestionBundle\Entity\VacacionesRepository")
  */
 class Vacaciones extends Solicitud
 {

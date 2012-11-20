@@ -1,9 +1,9 @@
 {% extends 'PermisoAuthBundle::layout.html.twig' %}
 {% block content %}
-<h2>Solicitud de vacaciones</h2>
+<h2>Solicitud de permiso</h2>
 <p>Por favor introduzca los siguientes datos:</p>
 
-<form novalidate="true" action="{{ path('nuevas_vacaciones') }}" method="post">    
+<form novalidate="true" action="{{ path('nuevo_permiso') }}" method="post">    
     
     <div>
         <p>{{ form_label(form.fechaInicio) }}</p>
@@ -18,9 +18,9 @@
     </div>
     
     <div>
-        <p>{{ form_label(form.diasPedidos) }}</p>
-        <p>{{ form_errors(form.diasPedidos) }}</p>
-        <p>{{ form_widget(form.diasPedidos) }}</p>
+        <p>{{ form_label(form.tipoPermiso) }}</p>
+        <p>{{ form_errors(form.tipoPermiso) }}</p>
+        <p>{{ form_widget(form.tipoPermiso) }}</p>
     </div>
 
     {{ form_rest(form) }}
@@ -28,5 +28,3 @@
 </form>
 
 {% endblock %}
-
-

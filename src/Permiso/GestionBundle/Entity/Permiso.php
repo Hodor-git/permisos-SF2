@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Permiso\GestionBundle\Entity\Solicitud;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Permiso\GestionBundle\Repositorios\PermisoRepository")
  * @ORM\Table(name="permiso")
  */
 class Permiso extends Solicitud
