@@ -15,13 +15,9 @@ class PermisoType extends AbstractType
                 'label' => 'Fecha de Inicio:',
                 ))
                 ->add('observaciones', 'text')
-                ->add('tipoPermiso', 'choice', array(
-                    'choices'   => array('asuntos_propios' => 'Asuntos Propios (1 Día)', 
-                                         'traslado_misma_localidad' => 'Traslado Misma Localidad (1 Día)',
-                                         'traslado_distinta_localidad' => 'Traslado Distinta Localidad (2 Días)', 
-                                         'matrimonio' => 'Matrimonio (15 Días)'),
-                    'required'  => false,
-                    'label' => 'Tipo de Permiso:'
+                ->add('tipoPermiso', 'entity', array(
+                        'class' => 'PermisoGestionBundle:TipoPermiso',
+                        'property' => 'descripcion',
                 ));
         
     }

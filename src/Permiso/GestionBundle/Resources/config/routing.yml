@@ -14,3 +14,7 @@ nuevas_vacaciones:
   pattern: /usuario/nuevas_vacaciones
   defaults: { _controller: PermisoGestionBundle:Solicitud:solicitarVacaciones }
 
+nuevo_permiso:
+  pattern: /usuario/nuevo_permiso
+  defaults: { _controller: PermisoGestionBundle:Solicitud:solicitarPermiso }
+

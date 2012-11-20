@@ -3,7 +3,7 @@
 
 <h4>Solicitud de permisos y vacaciones</h4>
 
-<p><a href="#">Solicitar un permiso</a></p>
+<p><a href="{{ url('nuevo_permiso') }}">Solicitar un permiso</a></p>
 <p><a href="{{ url('nuevas_vacaciones') }}">Solicitar días de vacaciones</a></p>
 <p><a href="#">Solicitudes pendientes de aprobacion</a></p>
 <p><a href="#">Solicitudes gestionadas y finalizadas</a></p>
@@ -12,5 +12,5 @@
     <p><a href="{{ url('index_gestor') }}">Acceso gestor acción uno</a></p>
     <p><a href="{{ url('index_gestor') }}">Acceso gestor acción dos</a></p>
 {% endif %}
-
+    
 {% endblock %}

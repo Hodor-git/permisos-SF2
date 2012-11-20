@@ -28,6 +28,11 @@ class TipoPermiso
      */
     protected $duracion;
     
+    /**
+     * @ORM\Column(name="descripcion", type="string")
+     */
+    protected $descripcion;
+    
 
     /**
      * Get id
@@ -84,4 +89,29 @@ class TipoPermiso
     {
         return $this->duracion;
     }
+    
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return TipoPermiso
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+    
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+    
+    
 }
