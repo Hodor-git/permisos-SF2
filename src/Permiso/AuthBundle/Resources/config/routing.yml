@@ -7,6 +7,3 @@ usuario_registrado:
   pattern: /registrar
   defaults: { _controller: PermisoAuthBundle:Security:registrarUsuario }
   
-inicio_aplicacion:
-  pattern: /inicioAplicacion
-  defaults: { _controller: PermisoGestionBundle:Default:inicio }

@@ -1,11 +1,3 @@
-permiso_gestion_homepage:
-    pattern:  /vacaciones
-    defaults: { _controller: PermisoGestionBundle:Default:index }
-    
-permiso_homepage:
-    pattern:  /permiso
-    defaults: { _controller: PermisoGestionBundle:Default:permiso }
-
 index_gestor:
   pattern: /gestor
   defaults: { _controller: PermisoGestionBundle:Default:gestor }
@@ -17,4 +9,8 @@ nuevas_vacaciones:
 nuevo_permiso:
   pattern: /usuario/nuevo_permiso
   defaults: { _controller: PermisoGestionBundle:Solicitud:solicitarPermiso }
+  
+inicio_aplicacion:
+  pattern: /inicioAplicacion
+  defaults: { _controller: PermisoGestionBundle:Default:inicio }
 
