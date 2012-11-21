@@ -31,7 +31,7 @@ class SolicitudController extends Controller
     }
     
     /**
-     * Obtiene el repositorio de la clase $nombre
+     * Obtiene el repositorio (DAO) de la clase $nombre
      * @param type $nombre (Nombre de la clase)
      * @return type
      */
@@ -44,14 +44,11 @@ class SolicitudController extends Controller
     
     public function indexAction()
     {
-       
+       //Código.....
     }
     
     public function solicitarVacacionesAction()
     {      
-        //Fecha de hoy
-        $hoy = new \DateTime("now");
-        
         //-- Obtenemos el request que contendrá los datos
         $request = $this->getRequest();
         
@@ -70,19 +67,16 @@ class SolicitudController extends Controller
         if($request->getMethod() == 'POST')
         {
             /*
-             * Ata los parámetros recibidos desde el POST al formulario
+             * Incorpora los parámetros recibidos desde el POST al objeto formulario
              */
             $form->bindRequest($request);
             
             if($form->isValid())
             {
-                $vacaciones->setEmpleado($usuarioEnSesion);
-                $vacaciones->setFechaEntrada($hoy);
-                $vacaciones->setFinalizada(false);
-                $vacaciones->setDenegada(false);
+                //Obtiene el repositorio de la entidad y guarda ésta en la persistencia
+                $this->getRepositorio('Vacaciones')->guardarVacaciones($vacaciones, $usuarioEnSesion);
                 
-                $this->getRepositorio('Permiso')->guardarPermiso($permiso);
-                
+                //Redirige
                 return $this->redirect($this->generateURL('inicio_aplicacion'));
             }
         }
@@ -91,20 +85,18 @@ class SolicitudController extends Controller
     }
     
     public function solicitarPermisoAction()
-    {
-        //Fecha de hoy
-        $hoy = new \DateTime("now");
-        
+    {   
         //-- Obtenemos el request que contendrá los datos
         $request = $this->getRequest();
         
         //---Obtenemos el usuario de la sesión (objeto)
         $usuarioEnSesion = $this->getUser();
         
-        // Nueva entidad de tipo Vacaciones
+        // Nueva entidad de tipo Permiso
         $permiso = new Permiso();
+        
         // Nuevo formulario al cual le pasamos los campos asociados
-        // a la entidad Vacaciones
+        // a la entidad Permiso
         $form = $this->createForm(new PermisoType(), $permiso);
         
         /**
@@ -119,14 +111,10 @@ class SolicitudController extends Controller
             
             if($form->isValid())
             {
+                //Obtiene el repositorio de la entidad y guarda ésta en la persistencia
+                $this->getRepositorio('Permiso')->guardarPermiso($permiso, $usuarioEnSesion);
                 
-                $permiso->setEmpleado($usuarioEnSesion);
-                $permiso->setFechaEntrada($hoy);
-                $permiso->setFinalizada(false);
-                $permiso->setDenegada(false);
-                
-                $this->getRepositorio('Permiso')->guardarPermiso($permiso);
-                
+                //Redirige
                 return $this->redirect($this->generateURL('inicio_aplicacion'));
             }
         }

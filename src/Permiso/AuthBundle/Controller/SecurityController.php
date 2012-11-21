@@ -90,13 +90,13 @@ class SecurityController extends Controller
 	$entity->setPassword($password);
     }
     
-    public function mostrar()
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $entity = $em->getRepository('PermisoAuthBundle:Usuario')->find(1);
-        return $this->render('PermisoAuthBundle:Security:exito.html.twig', array('nombre' => $entity->getUsuario));
-    }
+//    public function mostrar()
+//    {
+//        $em = $this->getDoctrine()->getEntityManager();
+//
+//        $entity = $em->getRepository('PermisoAuthBundle:Usuario')->find(1);
+//        return $this->render('PermisoAuthBundle:Security:exito.html.twig', array('nombre' => $entity->getUsuario));
+//    }
     
     public function loginHelperAction()
     {
