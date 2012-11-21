@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('PermisoAuthBundle:Default:index.html.twig', array());
+        //Código....
     }
 }

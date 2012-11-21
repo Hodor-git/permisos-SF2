@@ -1,3 +1,5 @@
+#Gestión bundle
+
 index_gestor:
   pattern: /gestor
   defaults: { _controller: PermisoGestionBundle:Default:gestor }

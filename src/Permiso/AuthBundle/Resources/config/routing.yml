@@ -1,7 +1,4 @@
-#Comentado porque no es necesario.
-#permiso_auth_homepage:
-#    pattern:  /
-#    defaults: { _controller: PermisoAuthBundle:Default:index }
+#Auth bundle
     
 usuario_registrado:
   pattern: /registrar
