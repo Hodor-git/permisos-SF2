@@ -1,6 +1,6 @@
 <?php
 
-namespace Permiso\GestionBundle\Entity;
+namespace Permiso\GestionBundle\Repositorios;
 
 use Doctrine\ORM\EntityRepository;
 

@@ -10,7 +10,7 @@ use Permiso\GestionBundle\Entity\Solicitud;
 
 /**
  * @ORM\Table(name="vacaciones")
- * @ORM\Entity(repositoryClass="Permiso\GestionBundle\Entity\VacacionesRepository")
+ * @ORM\Entity(repositoryClass="Permiso\GestionBundle\Repositorios\VacacionesRepository")
  */
 class Vacaciones extends Solicitud
 {
