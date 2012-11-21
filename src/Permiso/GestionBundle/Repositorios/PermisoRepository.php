@@ -32,6 +32,14 @@ class PermisoRepository extends EntityRepository
         $em->persist($permiso);
         $em->flush();
     }
+    
+    public function borrarSolicitud($solicitud)
+    {
+        $em = $this->getEntityManager();
+        
+        $em->remove($solicitud);
+        $em->flush();
+    }
 }
 
 

@@ -15,10 +15,9 @@ class DefaultController extends Controller
         $usuarioEnSesion = $this->getUser();
         
         if(is_null($usuarioEnSesion)) {
-            return $this->render('PermisoGestionBundle:Default:index.html.twig');
+            return $this->render('PermisoGestionBundle:Default:index.html.twig');         
         }
-        
-        return $this->render('PermisoGestionBundle:Default:menuPrincipal.html.twig');
+        return $this->redirect($this->generateURL('inicio_aplicacion'));
     }
     
     /**

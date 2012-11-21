@@ -81,7 +81,12 @@ class SolicitudController extends Controller
             }
         }
         
-        return $this->render('PermisoGestionBundle:Solicitud:vacacionesForm.html.twig', array('form' => $form->createView()));
+        //Enrutador para grabar nueva solicitud de vacaciones
+        //En la vista aparece dentro del action="{{ path(ruta) }}"
+        $path = 'nuevas_vacaciones';
+        
+        return $this->render('PermisoGestionBundle:Solicitud:vacacionesForm.html.twig', 
+                array('form' => $form->createView(), 'valorSubmit' => 'Enviar', 'ruta' => $path));
     }
     
     public function solicitarPermisoAction()
@@ -121,6 +126,34 @@ class SolicitudController extends Controller
         
         return $this->render('PermisoGestionBundle:Solicitud:permisoForm.html.twig', array('form' => $form->createView()));
     }
+    
+    public function listarSolicitudesPendientesAprobacionAction()
+    {
+        //Obtiene el usuario de la sesión
+        $usuarioEnSesion = $this->getUser();
+        
+        //Recoge los datos
+        $listaDeVacaciones = $this->getRepositorio('Vacaciones')->findby(array('empleado' => $usuarioEnSesion, 'finalizada' => false));
+        $listaDePermisos = $this->getRepositorio('Permiso')->findBy(array('empleado' => $usuarioEnSesion, 'finalizada' => false));
+        
+        //Los muestra en la vista correspondiente
+        return $this->render('PermisoGestionBundle:Solicitud:listaSolicitudesPendientes.html.twig', 
+                array('vacaciones' => $listaDeVacaciones, 'permisos' => $listaDePermisos));
+        
+    }
+    
+    public function borrarSolicitudAction($id, $tipo)
+    {
+        $repositorio = $this->getRepositorio($tipo);
+       
+        $solicitud = $repositorio->findOneBy(array('id' => $id));
+        
+        $repositorio->borrarSolicitud($solicitud);
+        
+        return $this->render('PermisoGestionBundle:Solicitud:exitoBorrado.html.twig');
+    }
+    
+    
    
 }
 

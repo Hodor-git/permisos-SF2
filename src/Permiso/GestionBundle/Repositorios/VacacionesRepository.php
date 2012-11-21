@@ -31,6 +31,14 @@ class VacacionesRepository extends EntityRepository
         //Persiste la entidad en la BDD
         $em->persist($vacaciones);
         $em->flush();
-    }    
+    }
+    
+    public function borrarSolicitud($solicitud)
+    {
+        $em = $this->getEntityManager();
+        
+        $em->remove($solicitud);
+        $em->flush();
+    }
 }
 

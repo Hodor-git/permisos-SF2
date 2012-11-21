@@ -5,14 +5,26 @@ index_gestor:
   defaults: { _controller: PermisoGestionBundle:Default:gestor }
 
 nuevas_vacaciones:
-  pattern: /usuario/nuevas_vacaciones
+  pattern: /empleado/nuevas_vacaciones
   defaults: { _controller: PermisoGestionBundle:Solicitud:solicitarVacaciones }
 
 nuevo_permiso:
-  pattern: /usuario/nuevo_permiso
+  pattern: /empleado/nuevo_permiso
   defaults: { _controller: PermisoGestionBundle:Solicitud:solicitarPermiso }
   
 inicio_aplicacion:
-  pattern: /inicioAplicacion
+  pattern: /empleado/inicioAplicacion
   defaults: { _controller: PermisoGestionBundle:Default:inicio }
+  
+solicitudes_pendientes:
+  pattern: /empleado/solicitudesPendientes
+  defaults: { _controller: PermisoGestionBundle:Solicitud:listarSolicitudesPendientesAprobacion }
+
+borrar_solicitud:
+  pattern: /empleado/borrarSolicitud/{id}/{tipo}
+  defaults: { _controller: PermisoGestionBundle:Solicitud:borrarSolicitud }
+
+editar_solicitud:
+  pattern: /empleado/editarSolicitud/{tipo}/{id}
+  defaults: { _controller: PermisoGestionBundle:Solicitud:borrarSolicitud }
 

@@ -3,7 +3,7 @@
 <h2>Solicitud de vacaciones</h2>
 <p>Por favor introduzca los siguientes datos:</p>
 
-<form novalidate="true" action="{{ path('nuevas_vacaciones') }}" method="post">    
+<form novalidate="true" action="{{ path(ruta) }}" method="post">    
     
     <div>
         <p>{{ form_label(form.fechaInicio) }}</p>
@@ -24,7 +24,7 @@
     </div>
 
     {{ form_rest(form) }}
-    <input type="submit" />
+    <input type="submit" value='{{ valorSubmit }}' />
 </form>
 
 <p><a href="{{ url('inicio_aplicacion') }}">Volver al menú principal</a></p>
