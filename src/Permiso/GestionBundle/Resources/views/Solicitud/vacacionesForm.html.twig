@@ -3,8 +3,11 @@
 <h2>Solicitud de vacaciones</h2>
 <p>Por favor introduzca los siguientes datos:</p>
 
-<form novalidate="true" action="{{ path(ruta) }}" method="post">    
-    
+{% if editar == TRUE %}
+<form novalidate="true" action="{{ path('editar_vacaciones', {'id': id}) }}" method="post">    
+{% else %}
+<form novalidate="true" action="{{ path('nuevas_vacaciones') }}" method="post">
+{% endif %}
     <div>
         <p>{{ form_label(form.fechaInicio) }}</p>
         <p>{{ form_errors(form.fechaInicio) }}</p>

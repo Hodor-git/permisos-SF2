@@ -22,8 +22,8 @@
                 <td>{{ solicitud.fechaInicio | date('d-m-Y') }}</td>
                 <td>{{ solicitud.diasPedidos }}</td>
                 <td>{{ solicitud.observaciones }}</td>
-                <td><a href="#">Editar</a></td>
-                <td><a href="{{ path('borrar_solicitud', {'id': solicitud.id, 'tipo': 'Vacaciones'}) }}">Eliminar</a>
+                <td><a href="{{ path('editar_vacaciones', {'id': solicitud.id}) }}">Editar</a></td>
+                <td><a href="{{ path('mostrar_solicitud', {'id': solicitud.id, 'tipo': 'Vacaciones'}) }}">Eliminar</a>
             </tr>
         {% endfor %}
     {% else %}
@@ -50,8 +50,8 @@
                 <td>{{ permiso.fechaInicio | date('d-m-Y') }}</td>
                 <td>{{ permiso.tipoPermiso.descripcion }}</td>
                 <td>{{ permiso.observaciones }}</td>
-                <td><a href="#">Editar</a></td>
-                <td><a href="{{ path('borrar_solicitud', {'id': permiso.id, 'tipo': 'Permiso'}) }}">Eliminar</a></td>
+                <td><a href="{{ path('editar_permiso', {'id': permiso.id}) }}">Editar</a></td>
+                <td><a href="{{ path('mostrar_solicitud', {'id': permiso.id, 'tipo': 'Permiso'}) }}">Eliminar</a></td>
             </tr>
         {% endfor %}
     {% else %}

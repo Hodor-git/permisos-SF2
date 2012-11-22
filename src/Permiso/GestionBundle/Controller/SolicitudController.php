@@ -86,9 +86,38 @@ class SolicitudController extends Controller
         $path = 'nuevas_vacaciones';
         
         return $this->render('PermisoGestionBundle:Solicitud:vacacionesForm.html.twig', 
-                array('form' => $form->createView(), 'valorSubmit' => 'Enviar', 'ruta' => $path));
+                array('form' => $form->createView(), 'valorSubmit' => 'Enviar', 'editar' => false));
     }
     
+    public function editarVacacionesAction($id)
+    {
+        $vacaciones = $this->getRepositorio('Vacaciones')->findOneBy(array('id' => $id));
+        
+        //---Obtenemos el usuario de la sesión (objeto)
+        $usuarioEnSesion = $this->getUser();
+        
+        $form = $this->createForm(new VacacionesType, $vacaciones);
+        
+        $request = $this->getRequest();
+        
+        if($request->getMethod() == 'POST')
+        {
+            $form->bindRequest($request);
+            
+            if($form->isValid())
+            {
+                $this->getRepositorio('Vacaciones')->guardarVacaciones($vacaciones, $usuarioEnSesion);
+                
+                //Redirige
+                return $this->redirect($this->generateURL('inicio_aplicacion'));
+            }
+        }
+        
+        return $this->render('PermisoGestionBundle:Solicitud:vacacionesForm.html.twig', 
+                array('form' => $form->createView(), 'valorSubmit' => 'Editar', 'editar' => true, 'id' => $id));
+    }
+
+
     public function solicitarPermisoAction()
     {   
         //-- Obtenemos el request que contendrá los datos
@@ -124,9 +153,39 @@ class SolicitudController extends Controller
             }
         }
         
-        return $this->render('PermisoGestionBundle:Solicitud:permisoForm.html.twig', array('form' => $form->createView()));
+        return $this->render('PermisoGestionBundle:Solicitud:permisoForm.html.twig', 
+                array('form' => $form->createView(),'valorSubmit' => 'Enviar', 'editar' => false));
     }
     
+    public function editarPermisoAction($id)
+    {
+        $permiso = $this->getRepositorio('Permiso')->findOneBy(array('id' => $id));
+        
+        //---Obtenemos el usuario de la sesión (objeto)
+        $usuarioEnSesion = $this->getUser();
+        
+        $form = $this->createForm(new PermisoType, $permiso);
+        
+        $request = $this->getRequest();
+        
+        if($request->getMethod() == 'POST')
+        {
+            $form->bindRequest($request);
+            
+            if($form->isValid())
+            {
+                $this->getRepositorio('Permiso')->guardarPermiso($permiso, $usuarioEnSesion);
+                
+                //Redirige
+                return $this->redirect($this->generateURL('inicio_aplicacion'));
+            }
+        }
+        
+        return $this->render('PermisoGestionBundle:Solicitud:permisoForm.html.twig', 
+                array('form' => $form->createView(), 'valorSubmit' => 'Editar', 'editar' => true, 'id' => $id));
+    }
+
+
     public function listarSolicitudesPendientesAprobacionAction()
     {
         //Obtiene el usuario de la sesión
@@ -142,7 +201,14 @@ class SolicitudController extends Controller
         
     }
     
-    public function borrarSolicitudAction($id, $tipo)
+    public function mostrarSolicitudAction($tipo, $id)
+    {
+        $solicitud = $this->getRepositorio($tipo)->findOneBy(array('id' => $id));
+        
+        return $this->render('PermisoGestionBundle:Solicitud:mostrarSolicitud.html.twig', array('solicitud' => $solicitud, 'tipo' => $tipo));
+    }
+    
+    public function borrarSolicitudAction($tipo, $id)
     {
         $repositorio = $this->getRepositorio($tipo);
        

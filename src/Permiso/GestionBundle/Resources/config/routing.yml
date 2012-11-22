@@ -21,10 +21,18 @@ solicitudes_pendientes:
   defaults: { _controller: PermisoGestionBundle:Solicitud:listarSolicitudesPendientesAprobacion }
 
 borrar_solicitud:
-  pattern: /empleado/borrarSolicitud/{id}/{tipo}
+  pattern: /empleado/borrarSolicitud/{tipo}/{id}
   defaults: { _controller: PermisoGestionBundle:Solicitud:borrarSolicitud }
 
-editar_solicitud:
-  pattern: /empleado/editarSolicitud/{tipo}/{id}
-  defaults: { _controller: PermisoGestionBundle:Solicitud:borrarSolicitud }
+editar_vacaciones:
+  pattern: /empleado/editarVacaciones/{id}
+  defaults: { _controller: PermisoGestionBundle:Solicitud:editarVacaciones }
+  
+editar_permiso:
+  pattern: /empleado/editarPermiso/{id}
+  defaults: { _controller: PermisoGestionBundle:Solicitud:editarPermiso }
+
+mostrar_solicitud:
+  pattern: /empleado/mostrarSolicitud/{tipo}/{id}
+  defaults: { _controller: PermisoGestionBundle:Solicitud:mostrarSolicitud }
 

@@ -19,7 +19,7 @@ security:
             form_login:
                 login_path: /login
                 check_path: /login_check
-                default_target_path: /inicioAplicacion
+                default_target_path: /empleado/inicioAplicacion
                 always_use_default_target_path: true
             logout:
                 path: /logout
@@ -30,5 +30,4 @@ security:
         - { path: /login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /empleado, roles: ROLE_EMPLEADO }
         - { path: /gestor, roles: ROLE_GESTOR }
-        - { path: /inicioAplicacion, roles: ROLE_EMPLEADO }    
         - { path: /.*, roles: IS_AUTHENTICATED_ANONYMOUSLY }

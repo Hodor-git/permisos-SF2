@@ -3,8 +3,11 @@
 <h2>Solicitud de permiso</h2>
 <p>Por favor introduzca los siguientes datos:</p>
 
-<form novalidate="true" action="{{ path('nuevo_permiso') }}" method="post">    
-    
+{% if editar == TRUE %}
+<form novalidate="true" action="{{ path('editar_permiso', {'id': id}) }}" method="post">    
+{% else %}
+<form novalidate="true" action="{{ path('nuevo_permiso') }}" method="post">
+{% endif %}     
     <div>
         <p>{{ form_label(form.fechaInicio) }}</p>
         <p>{{ form_errors(form.fechaInicio) }}</p>
@@ -24,7 +27,7 @@
     </div>
 
     {{ form_rest(form) }}
-    <input type="submit" />
+    <input type="submit" value='{{ valorSubmit }}' />
 </form>
 
 <p><a href="{{ url('inicio_aplicacion') }}">Volver al menú principal</a></p>
