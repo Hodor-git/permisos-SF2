@@ -33,7 +33,7 @@ class VacacionesRepository extends EntityRepository
         $em->flush();
     }
     
-    public function borrarSolicitud($solicitud)
+    public function borrarSolicitud($solicitud) 
     {
         $em = $this->getEntityManager();
         

@@ -195,6 +195,11 @@ class SolicitudController extends Controller
         $listaDeVacaciones = $this->getRepositorio('Vacaciones')->findby(array('empleado' => $usuarioEnSesion, 'finalizada' => false));
         $listaDePermisos = $this->getRepositorio('Permiso')->findBy(array('empleado' => $usuarioEnSesion, 'finalizada' => false));
         
+        if (!$listaDePermisos || !$listaDeVacaciones)
+        {
+            throw $this->createNotFoundException('No ha sido posible encontrar las solicitudes. Por favor, inténtelo de nuevo.');
+        }
+        
         //Los muestra en la vista correspondiente
         return $this->render('PermisoGestionBundle:Solicitud:listaSolicitudesPendientes.html.twig', 
                 array('vacaciones' => $listaDeVacaciones, 'permisos' => $listaDePermisos));
@@ -205,17 +210,25 @@ class SolicitudController extends Controller
     {
         $solicitud = $this->getRepositorio($tipo)->findOneBy(array('id' => $id));
         
+        if(!$solicitud)
+        {
+            throw $this->createNotFoundException('No es posible mostrar la solicitud. Por favor, inténtelo de nuevo.');
+        }
+        
         return $this->render('PermisoGestionBundle:Solicitud:mostrarSolicitud.html.twig', array('solicitud' => $solicitud, 'tipo' => $tipo));
     }
     
     public function borrarSolicitudAction($tipo, $id)
     {
         $repositorio = $this->getRepositorio($tipo);
-       
+        
+        if (!$repositorio) 
+        {
+            throw $this->createNotFoundException('No ha sido posible borrar la solicitud.');
+        }
+        
         $solicitud = $repositorio->findOneBy(array('id' => $id));
-        
-        $repositorio->borrarSolicitud($solicitud);
-        
+            
         return $this->render('PermisoGestionBundle:Solicitud:exitoBorrado.html.twig');
     }
     
