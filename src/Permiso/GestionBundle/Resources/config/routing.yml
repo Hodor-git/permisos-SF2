@@ -24,6 +24,10 @@ solicitudes_finalizadas:
   pattern: /empleado/solicitudesFinalizadas
   defaults: { _controller: PermisoGestionBundle:Solicitud:listarSolicitudesFinalizadas }
 
+solicitudes_pendientes_gestion:
+  pattern: /gestor/solicitudesPendientesGestion
+  defaults: { _controller: PermisoGestionBundle:Solicitud:listarSolicitudesPendientesGestion }
+
 borrar_solicitud:
   pattern: /empleado/borrarSolicitud/{tipo}/{id}
   defaults: { _controller: PermisoGestionBundle:Solicitud:borrarSolicitud }

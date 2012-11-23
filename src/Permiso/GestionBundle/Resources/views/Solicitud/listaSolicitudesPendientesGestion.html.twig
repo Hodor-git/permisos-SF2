@@ -1,0 +1,66 @@
+{% extends 'PermisoAuthBundle::layout.html.twig' %}
+{% block content %}
+
+<h2>Listado de solicitudes pendientes de gestión</h2>
+
+<h3>- Vacaciones pendientes de gestionar:</h3>
+
+<table border="1">
+     
+    {% if vacaciones %}
+            <tr>
+                <th>ID</th>
+                <th>Nombre del Empleado</th>
+                <th>Fecha de Entrada</th>
+                <th>Fecha de Inicio</th>
+                <th>Días solicitados</th>
+                <th>Observaciones</th>
+            </tr>
+        {% for solicitud in vacaciones %}
+            <tr>
+                <td>{{ solicitud.id }}</td>
+                <td>{{ solicitud.empleado.username }}</td>
+                <td>{{ solicitud.fechaEntrada | date('d-m-Y') }}</td>
+                <td>{{ solicitud.fechaInicio | date('d-m-Y') }}</td>
+                <td>{{ solicitud.diasPedidos }}</td>
+                <td>{{ solicitud.observaciones }}</td>
+                <td><a href="#">Mostrar</a></td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <p>No hay solicitudes que mostrar</p>
+    {% endif %}
+    
+</table>
+
+<h3>- Permisos pendientes de gestionar</h3>
+
+<table border="1">
+    {% if permisos %}
+            <tr>
+                <th>ID</th>
+                <th>Nombre del Empleado</th>
+                <th>Fecha de Entrada</th>
+                <th>Fecha de Inicio</th>
+                <th>Tipo de Permiso</th>
+                <th>Observaciones</th>
+            </tr>
+        {% for permiso in permisos %}
+            <tr>
+                <td>{{ permiso.id }}</td>
+                <td>{{ permiso.empleado.username }}</td>
+                <td>{{ permiso.fechaEntrada | date('d-m-Y') }}</td>
+                <td>{{ permiso.fechaInicio | date('d-m-Y') }}</td>
+                <td>{{ permiso.tipoPermiso.descripcion }}</td>
+                <td>{{ permiso.observaciones }}</td>
+                <td><a href="#">Mostrar</a></td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <p>No hay solicitudes que mostrar</p>
+    {% endif %}
+</table>
+
+<p><a href="{{ url('inicio_aplicacion') }}">Volver al menú principal</a></p>
+
+{% endblock %}

@@ -40,6 +40,18 @@ class PermisoRepository extends EntityRepository
         $em->remove($solicitud);
         $em->flush();
     }
+    
+    public function permisosPendientesGestionar()
+    {
+      $query = $this->createQueryBuilder('v')
+              ->select('v.diasPedidos')
+              ->setParameter('finalizada', false);
+              
+      
+      $resultado = $query->getQuery()->getResult();
+      
+      return $resultado;
+    }
 }
 
 

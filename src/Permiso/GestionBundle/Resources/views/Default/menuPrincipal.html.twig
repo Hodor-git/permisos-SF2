@@ -9,8 +9,8 @@
 <p><a href="{{ url('solicitudes_finalizadas') }}">Solicitudes gestionadas y finalizadas</a></p>
 
 {% if is_granted('ROLE_GESTOR') %}
-    <p><a href="{{ url('index_gestor') }}">Acceso gestor acción uno</a></p>
-    <p><a href="{{ url('index_gestor') }}">Acceso gestor acción dos</a></p>
+    <p><a href="{{ url('solicitudes_pendientes_gestion') }}">Lista de solicitudes pendientes de gestión</a></p>
+    <p><a href="#">Acceso gestor acción dos</a></p>
 {% endif %}
     
 {% if app.session.hasFlash('aviso') %}

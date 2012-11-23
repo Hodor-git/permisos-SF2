@@ -250,7 +250,7 @@ class Solicitud
      */
     public function getEmpleado()
     {
-        return $this->categoria;
+        return $this->empleado;
     }
     
 }

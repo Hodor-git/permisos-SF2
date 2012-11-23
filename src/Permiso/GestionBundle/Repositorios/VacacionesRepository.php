@@ -40,5 +40,24 @@ class VacacionesRepository extends EntityRepository
         $em->remove($solicitud);
         $em->flush();
     }
+    
+    public function vacacionesPendientesGestionar($gestor)
+    {
+//      $query = $this->createQueryBuilder('v')
+//              ->setParameter('finalizada', false);
+//      
+//      $resultado = $query->getQuery()->getResult(); AND e.id = ?2" , 2=> 3
+      
+       $query = $this->createQueryBuilder('v');
+       $query->add('select', 'v')
+                ->add('from', '\Permiso\GestionBundle\Entity\Vacaciones v, \Permiso\GestionBundle\Entity\Empleado e, \Permiso\GestionBundle\Entity\Gestor g')
+                ->add('where', "v.finalizada = ?1 AND v.empleado = e.id AND e.gestor = g.id") 
+                ->setParameters(array (1=> false));
+
+        //echo $qb->getDql();
+        $resultado = $query->getQuery()->getResult();
+      
+        return $resultado;
+    }
 }
 

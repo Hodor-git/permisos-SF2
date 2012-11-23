@@ -218,6 +218,7 @@ class SolicitudController extends Controller
         
         $repositorio->borrarSolicitud($solicitud);
         
+        //Muestra un mensaje en el menú principal
         $this->get('session')->setFlash('aviso', 'La solicitud ha sido borrada con éxito.');
         
         //return $this->render('PermisoGestionBundle:Solicitud:exitoBorrado.html.twig');
@@ -245,13 +246,28 @@ class SolicitudController extends Controller
         $usuarioEnSesion = $this->getUser();
         
         //Recoge los datos
-        $listaDeVacaciones = $this->getRepositorio('Vacaciones')->findby(array('empleado' => $usuarioEnSesion, 'finalizada' => false));
+        $listaDeVacaciones = $this->getRepositorio('Vacaciones')->findBy(array('empleado' => $usuarioEnSesion, 'finalizada' => false));
         $listaDePermisos = $this->getRepositorio('Permiso')->findBy(array('empleado' => $usuarioEnSesion, 'finalizada' => false));
         
         //Los muestra en la vista correspondiente
         return $this->render('PermisoGestionBundle:Solicitud:listaSolicitudesPendientes.html.twig', 
                 array('vacaciones' => $listaDeVacaciones, 'permisos' => $listaDePermisos));
         
+    }
+    
+    public function listarSolicitudesPendientesGestionAction()
+    {
+        //Obtiene el usuario de la sesión
+        $usuarioEnSesion = $this->getUser();
+        
+        //$listaVacaciones = $this->getRepositorio('Vacaciones')->findBy(array('empleado.gestor' =>$usuarioEnSesion, 'finalizada' => false));
+        //$listaPermisos = $this->getRepositorio('Permiso')->findBy(array('empleado.gestor' =>$usuarioEnSesion, 'finalizada' => false));
+        
+        $listaVacaciones = $this->getRepositorio('Vacaciones')->vacacionesPendientesGestionar($usuarioEnSesion);
+        $listaPermisos = null;//$this->getRepositorio('Permiso')->permisosPendientesGestionar();
+        
+        return $this->render('PermisoGestionBundle:Solicitud:listaSolicitudesPendientesGestion.html.twig', 
+                array('vacaciones' => $listaVacaciones, 'permisos' => $listaPermisos));
     }
     
 }
