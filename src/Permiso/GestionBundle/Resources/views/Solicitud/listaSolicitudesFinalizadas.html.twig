@@ -1,0 +1,70 @@
+{% extends 'PermisoAuthBundle::layout.html.twig' %}
+{% block content %}
+
+<h2>Listado de solicitudes finalizadas y gestionadas</h2>
+
+<h3>- Vacaciones</h3>
+
+<table border="1">
+     
+    {% if vacaciones %}
+            <tr>
+                <th>ID</th>
+                <th>Fecha de Registro</th>
+                <th>Fecha de Gestión</th>
+                <th>Fecha de Inicio</th>
+                <th>Días solicitados</th>              
+                <th>Observaciones</th>
+                <th>Resolución</th>
+            </tr>
+        {% for solicitud in vacaciones %}
+            <tr>
+                <td>{{ solicitud.id }}</td>
+                <td>{{ solicitud.fechaEntrada | date('d-m-Y') }}</td>
+                <td>{{ solicitud.fechaGestion | date('d-m-Y') }}</td>
+                <td>{{ solicitud.fechaInicio | date('d-m-Y') }}</td> 
+                <td>{{ solicitud.diasPedidos }}</td>
+                <td>{{ solicitud.observaciones }}</td>
+                <td>{{ solicitud.resolucion }}</td>
+                <td><a href="#">Generar informe (PDF)</a></td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <p>No hay solicitudes que mostrar</p>
+    {% endif %}
+    
+</table>
+
+<h3>- Permisos</h3>
+
+<table border="1">
+    {% if permisos %}
+            <tr>
+                <th>ID</th>
+                <th>Fecha de Registro</th>
+                <th>Fecha de Gestión</th>
+                <th>Fecha de Inicio</th>
+                <th>Tipo de Permiso</th>              
+                <th>Observaciones</th>
+                <th>Resolución</th>
+            </tr>
+        {% for permiso in permisos %}
+            <tr>
+                <td>{{ permiso.id }}</td>
+                <td>{{ permiso.fechaEntrada | date('d-m-Y') }}</td>
+                <td>{{ permiso.fechaGestion | date('d-m-Y') }}</td>
+                <td>{{ permiso.fechaInicio | date('d-m-Y') }}</td> 
+                <td>{{ permiso.tipoPermiso.descripcion }}</td>
+                <td>{{ permiso.observaciones }}</td>
+                <td>{{ permiso.resolucion }}</td>
+                <td><a href="#">Generar informe (PDF)</a></td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <p>No hay solicitudes que mostrar</p>
+    {% endif %}
+</table>
+
+<p><a href="{{ url('inicio_aplicacion') }}">Volver al menú principal</a></p>
+
+{% endblock %}

@@ -6,11 +6,17 @@
 <p><a href="{{ url('nuevo_permiso') }}">Solicitar un permiso</a></p>
 <p><a href="{{ url('nuevas_vacaciones') }}">Solicitar días de vacaciones</a></p>
 <p><a href="{{ url('solicitudes_pendientes') }}">Lista de solicitudes pendientes de aprobacion</a></p>
-<p><a href="#">Solicitudes gestionadas y finalizadas</a></p>
+<p><a href="{{ url('solicitudes_finalizadas') }}">Solicitudes gestionadas y finalizadas</a></p>
 
 {% if is_granted('ROLE_GESTOR') %}
     <p><a href="{{ url('index_gestor') }}">Acceso gestor acción uno</a></p>
     <p><a href="{{ url('index_gestor') }}">Acceso gestor acción dos</a></p>
+{% endif %}
+    
+{% if app.session.hasFlash('aviso') %}
+    <div class="aviso">
+        {{ app.session.flash('aviso') }}
+    </div>
 {% endif %}
     
 {% endblock %}

@@ -47,6 +47,12 @@ class Solicitud
     protected $observaciones;
     
     /**
+     * @ORM\Column(name="resolucion", type="string", length=200)
+     * @Assert\MaxLength(limit = "200", message = "Máximo 200 caracteres")
+     */
+    protected $resolucion;
+    
+    /**
      * @ORM\ManyToOne(targetEntity="Empleado")
      * @ORM\JoinColumn(name="empleado_id", referencedColumnName="id")
      * @return integer
@@ -199,6 +205,29 @@ class Solicitud
     public function getObservaciones()
     {
         return $this->observaciones;
+    }
+    
+    /**
+     * Set resolucion
+     *
+     * @param string $resolucion
+     * @return Solicitud
+     */
+    public function setResolucion($resolucion)
+    {
+        $this->resolucion = $resolucion;
+    
+        return $this;
+    }
+
+    /**
+     * Get resolucion
+     *
+     * @return string 
+     */
+    public function getResolucion()
+    {
+        return $this->resolucion;
     }
     
     /**

@@ -39,47 +39,24 @@ class SecurityController extends Controller
         $gestor = $em->getRepository('PermisoGestionBundle:Gestor');
         $categoria = $em->getRepository('PermisoGestionBundle:Categoria');
         
-        $pepito = $gestor->findBy(array('username' => 'pepe'));
-        $empleado = $categoria->findBy(array('nombre' => 'empleado'));
+        //$pepito = $gestor->findBy(array('username' => 'pepe'));
+        $empleado = $categoria->findBy(array('nombre' => 'gestor'));
         
-        $manolito = new Empleado();
+        $manolito = new Gestor();
         
-        $manolito->setUsername('manolito');
-        $manolito->setPassword('gafotas');
-        $manolito->setEmail('manolito@manolon.dot.com');
+        $manolito->setUsername('pepito');
+        $manolito->setPassword('piscinas');
+        $manolito->setEmail('pepito@pepito.dot.com');
         $manolito->setCategoria($empleado[0]);
-        $manolito->setGestor($pepito[0]);
+        //$manolito->setGestor($pepito[0]);
         
         $this->setSecurePassword($manolito);
         
         $em->persist($manolito);
         
-        $em->flush();
+        $em->flush();*/
         
-        
-        $entity  = new Usuario();
-        
-        $entity->setUsuario('pepito');
-        $entity->setPassword('piscinas');
-        $this->setSecurePassword($entity);
-
-        $em = $this->getDoctrine()->getEntityManager();
-        $em->persist($entity);
-        $em->flush();
-        
-        return $this->render('PermisoAuthBundle:Security:exito.html.twig');
-        
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $entity = $em->getRepository('PermisoAuthBundle:Usuario')->find(1);
-        $permisos = $entity->getRoles();*/
-        $em = $this->getDoctrine()->getEntityManager();
-        $empleado = $em->getRepository('PermisoGestionBundle:Empleado');
-        $entity = $empleado->find(3);
-        //$permisos = $entity->getCategoria()->getRole();
-        $permisos = $entity->getRoles();
-        
-        return $this->render('PermisoAuthBundle:Security:exito.html.twig', array('empleado' => $entity, 'permiso' => var_dump($permisos)));
+        return $this->render('PermisoGestionBundle:Solicitud:exitoBorrado.html.twig');
     }
     
     private function setSecurePassword(&$entity) 
