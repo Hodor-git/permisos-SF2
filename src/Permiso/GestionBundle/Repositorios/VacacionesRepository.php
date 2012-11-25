@@ -4,6 +4,8 @@ namespace Permiso\GestionBundle\Repositorios;
 
 use Doctrine\ORM\EntityRepository;
 
+use Permiso\GestionBundle\Entity\Empleado;
+
 class VacacionesRepository extends EntityRepository
 {
     /**
@@ -41,23 +43,33 @@ class VacacionesRepository extends EntityRepository
         $em->flush();
     }
     
-    public function vacacionesPendientesGestionar($gestor)
-    {
-//      $query = $this->createQueryBuilder('v')
-//              ->setParameter('finalizada', false);
-//      
-//      $resultado = $query->getQuery()->getResult(); AND e.id = ?2" , 2=> 3
+    /**
+     * Método para listar las vacaciones gestionadas pendientes de aprobación.
+     * Es decir, aquellas solicitudes pertenecientes a los empleados a cargo de 
+     * determinado gestor.
+     * 
+     * @param integer $gestorID
+     * @return array listado
+     */
+    public function vacacionesPendientesGestionar($gestorID)
+    {     
+//       $query = $this->createQueryBuilder('v');
+//       $query->add('select', 'v')
+//                ->add('from', '\Permiso\GestionBundle\Entity\Vacaciones v, \Permiso\GestionBundle\Entity\Empleado e, \Permiso\GestionBundle\Entity\Gestor g')
+//                ->add('where', "v.finalizada = ?1 AND v.empleado = e.id AND e.gestor = ?2")
+//                 ->setParameters(array (1 => false, 2 => 1));
       
-       $query = $this->createQueryBuilder('v');
-       $query->add('select', 'v')
-                ->add('from', '\Permiso\GestionBundle\Entity\Vacaciones v, \Permiso\GestionBundle\Entity\Empleado e, \Permiso\GestionBundle\Entity\Gestor g')
-                ->add('where', "v.finalizada = ?1 AND v.empleado = e.id AND e.gestor = g.id") 
-                ->setParameters(array (1=> false));
-
-        //echo $qb->getDql();
+        $query = $this->getEntityManager()->createQueryBuilder();
+        
+        $query->select('v')
+        ->from('Permiso\GestionBundle\Entity\Vacaciones', 'v')
+        ->innerJoin('v.empleado', 'e')
+        ->where('v.finalizada = ?1 AND e.gestor = ?2')
+        ->setParameters(array (1 => false, 2 => $gestorID));
+        
         $resultado = $query->getQuery()->getResult();
       
-        return $resultado;
+        return $resultado;       
     }
 }
 

@@ -43,4 +43,4 @@ editar_permiso:
 mostrar_solicitud:
   pattern: /empleado/mostrarSolicitud/{tipo}/{id}
   defaults: { _controller: PermisoGestionBundle:Solicitud:mostrarSolicitud }
-
+  

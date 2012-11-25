@@ -257,18 +257,15 @@ class SolicitudController extends Controller
     
     public function listarSolicitudesPendientesGestionAction()
     {
-        //Obtiene el usuario de la sesión
-        $usuarioEnSesion = $this->getUser();
+         //Obtiene el usuario de la sesión
+         $usuarioEnSesionID = $this->getUser()->getId();
         
-        //$listaVacaciones = $this->getRepositorio('Vacaciones')->findBy(array('empleado.gestor' =>$usuarioEnSesion, 'finalizada' => false));
-        //$listaPermisos = $this->getRepositorio('Permiso')->findBy(array('empleado.gestor' =>$usuarioEnSesion, 'finalizada' => false));
-        
-        $listaVacaciones = $this->getRepositorio('Vacaciones')->vacacionesPendientesGestionar($usuarioEnSesion);
-        $listaPermisos = null;//$this->getRepositorio('Permiso')->permisosPendientesGestionar();
+        $listaVacaciones = $this->getRepositorio('Vacaciones')->vacacionesPendientesGestionar($usuarioEnSesionID);
+        $listaPermisos = $this->getRepositorio('Permiso')->permisosPendientesGestionar($usuarioEnSesionID);
         
         return $this->render('PermisoGestionBundle:Solicitud:listaSolicitudesPendientesGestion.html.twig', 
                 array('vacaciones' => $listaVacaciones, 'permisos' => $listaPermisos));
     }
-    
+       
 }
 

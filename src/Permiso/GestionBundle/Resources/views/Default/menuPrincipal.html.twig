@@ -7,12 +7,15 @@
 <p><a href="{{ url('nuevas_vacaciones') }}">Solicitar días de vacaciones</a></p>
 <p><a href="{{ url('solicitudes_pendientes') }}">Lista de solicitudes pendientes de aprobacion</a></p>
 <p><a href="{{ url('solicitudes_finalizadas') }}">Solicitudes gestionadas y finalizadas</a></p>
-
+<br />
 {% if is_granted('ROLE_GESTOR') %}
+    <p>Herramientas de Gestión:</p>
     <p><a href="{{ url('solicitudes_pendientes_gestion') }}">Lista de solicitudes pendientes de gestión</a></p>
-    <p><a href="#">Acceso gestor acción dos</a></p>
+    <p><a href="#">Historico de Solicitudes</a></p>
+    <p><a href="#">Informe de permisos y vacaciones</a></p>
 {% endif %}
-    
+
+<br />
 {% if app.session.hasFlash('aviso') %}
     <div class="aviso">
         {{ app.session.flash('aviso') }}
