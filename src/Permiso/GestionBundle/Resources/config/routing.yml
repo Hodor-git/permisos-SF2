@@ -44,3 +44,7 @@ mostrar_solicitud:
   pattern: /empleado/mostrarSolicitud/{tipo}/{id}
   defaults: { _controller: PermisoGestionBundle:Solicitud:mostrarSolicitud }
   
+gestionar_solicitud:
+  pattern: /empleado/gestionarSolicitud/{tipo}/{id}
+  defaults: { _controller: PermisoGestionBundle:Solicitud:gestionarSolicitud }
+  

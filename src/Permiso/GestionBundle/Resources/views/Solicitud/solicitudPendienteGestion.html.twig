@@ -1,7 +1,7 @@
 {% extends 'PermisoAuthBundle::layout.html.twig' %}
 {% block content %}
 
-<p>Solicitud a gestionar</p>
+<p>Solicitud a gestionar {{ tipo }}</p>
     
     <div>
         <p>Empleado: {{ solicitud.empleado.username }}</p>
@@ -23,7 +23,7 @@
         {% endif %}
     </div>
 
-<form novalidate="true" action="#" method="post">    
+<form novalidate="true" action="{{ path('gestionar_solicitud', {'tipo': tipo, 'id': solicitud.id}) }}" method="post">    
     
     <div>
         <p>{{ form_label(form.resolucion) }}</p>
@@ -32,7 +32,7 @@
     </div>
 
     {{ form_rest(form) }}
-    <input type="submit" value='#' />
+    <input type="submit" value='Aceptar' name="aceptar"/> || <input type="submit" value='Rechazar' name="rechazar" />
 </form>
 
 

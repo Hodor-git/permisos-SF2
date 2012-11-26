@@ -285,6 +285,46 @@ class SolicitudController extends Controller
         return $this->render('PermisoGestionBundle:Solicitud:listaSolicitudesPendientesGestion.html.twig', 
                 array('vacaciones' => $listaVacaciones, 'permisos' => $listaPermisos));
     }
+    
+    public function gestionarSolicitudAction($id, $tipo)
+    {
+        $solicitud = $this->getRepositorio($tipo)->findOneBy(array('id' => $id));
+        
+        //Obtiene el request
+        $request = $this->getRequest();
+        
+        //Obtiene el contenido del campo resolución dentro del formulario
+        $resolucion = $request->get('resolucion');
+        
+        if($solicitud->getFinalizada() == TRUE)
+        {
+            //Muestra un mensaje en el menú principal
+            $this->get('session')->setFlash('aviso', 'Esta solicitud ya ha sido gestionada. Para más información contacte con el administrador');
+
+            //return $this->render('PermisoGestionBundle:Solicitud:exitoBorrado.html.twig');
+            return $this->redirect($this->generateUrl('inicio_aplicacion'));
+        }
+        
+        //Si se ha pulsado el botón de aceptar la solicitud...
+        if($this->getRequest()->request->has('aceptar'))
+        {
+            //Se graba la solicitud en la BDD
+            $this->getRepositorio($tipo)->gestionarSolicitudRepositorio(false, $resolucion['resolucion'], $solicitud);
+            //Muestra un mensaje en el menú principal
+            $this->get('session')->setFlash('aviso', 'Solicitud aceptada y gestionada correctamente.');
+            //Redirige al menú principal de la aplicación
+            return $this->redirect($this->generateUrl('inicio_aplicacion'));
+            
+          //Si se ha pulsado el botón de rechazar la solicitud...  
+        } else {
+            //Se graba la solicitud en la BDD
+            $this->getRepositorio($tipo)->gestionarSolicitudRepositorio(true, $resolucion['resolucion'], $solicitud);
+            //Muestra un mensaje en el menú principal
+            $this->get('session')->setFlash('aviso', 'Solicitud rechazada y gestionada correctamente.');
+            //Redirige al menú principal
+            return $this->redirect($this->generateUrl('inicio_aplicacion'));
+        }          
+    }
        
 }
 
