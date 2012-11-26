@@ -23,7 +23,7 @@
                 <td>{{ solicitud.diasPedidos }}</td>
                 <td>{{ solicitud.observaciones }}</td>
                 <td><a href="{{ path('editar_vacaciones', {'id': solicitud.id}) }}">Editar</a></td>
-                <td><a href="{{ path('mostrar_solicitud', {'id': solicitud.id, 'tipo': 'Vacaciones'}) }}">Eliminar</a>
+                <td><a href="{{ path('mostrar_solicitud', {'id': solicitud.id,'tipo': 'Vacaciones'}) }}">Eliminar</a>
             </tr>
         {% endfor %}
     {% else %}

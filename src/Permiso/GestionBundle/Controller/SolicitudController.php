@@ -8,6 +8,7 @@ use Permiso\GestionBundle\Entity\Vacaciones;
 use Permiso\GestionBundle\Form\VacacionesType;
 use Permiso\GestionBundle\Entity\Permiso;
 use Permiso\GestionBundle\Form\PermisoType;
+use Permiso\GestionBundle\Form\ResolucionType;
 
 
 class SolicitudController extends Controller
@@ -194,15 +195,33 @@ class SolicitudController extends Controller
     }
     
     public function mostrarSolicitudAction($tipo, $id)
-    {
+    {   
+        //Obtengo la solicitud a mostrar
         $solicitud = $this->getRepositorio($tipo)->findOneBy(array('id' => $id));
         
+        //Obtengo la ID del usuario en sesión
+        $usuarioEnSesionID = $this->getUser()->getId();
+        
+        //Obtengo la ID del gestor a quien corresponde gestionar la solicitud
+        $gestorAsignadoID = $solicitud->getEmpleado()->getGestor()->getId();
+          
         if(!$solicitud)
         {
             throw $this->createNotFoundException('No es posible mostrar la solicitud. Por favor, inténtelo de nuevo.');
         }
         
-        return $this->render('PermisoGestionBundle:Solicitud:mostrarSolicitud.html.twig', array('solicitud' => $solicitud, 'tipo' => $tipo));
+        //Si el usuario en sesión es gestor y le corresponde a él gestionar la solicitud
+        if($this->get('security.context')->isGranted('ROLE_GESTOR') && ($usuarioEnSesionID == $gestorAsignadoID))
+        {
+            $form = $this->createForm(new ResolucionType);
+            
+            //Muestra la plantilla de solicitud pendiente de gestión
+            return $this->render('PermisoGestionBundle:Solicitud:solicitudPendienteGestion.html.twig', array('solicitud' => $solicitud, 'tipo' => $tipo, 'form' => $form->createView()));
+        //Si el usuario no cumple ambas condiciones anteriores se muestra la solicitud con la posibilidad de eliminarla.
+        } else {
+            return $this->render('PermisoGestionBundle:Solicitud:mostrarSolicitud.html.twig', array('solicitud' => $solicitud, 'tipo' => $tipo));
+        }  
+        
     }
     
     public function borrarSolicitudAction($tipo, $id)

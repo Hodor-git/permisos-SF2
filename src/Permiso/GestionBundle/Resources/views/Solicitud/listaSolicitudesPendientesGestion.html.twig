@@ -24,7 +24,7 @@
                 <td>{{ solicitud.fechaInicio | date('d-m-Y') }}</td>
                 <td>{{ solicitud.diasPedidos }}</td>
                 <td>{{ solicitud.observaciones }}</td>
-                <td><a href="#">Mostrar</a></td>
+                <td><a href="{{ path('mostrar_solicitud', {'id': solicitud.id, 'tipo': 'Vacaciones'}) }}">Gestionar</a></td>
             </tr>
         {% endfor %}
     {% else %}
@@ -53,7 +53,7 @@
                 <td>{{ permiso.fechaInicio | date('d-m-Y') }}</td>
                 <td>{{ permiso.tipoPermiso.descripcion }}</td>
                 <td>{{ permiso.observaciones }}</td>
-                <td><a href="#">Mostrar</a></td>
+                <td><a href="{{ path('mostrar_solicitud', {'id': permiso.id, 'tipo': 'Permiso'}) }}">Gestionar</a></td>
             </tr>
         {% endfor %}
     {% else %}

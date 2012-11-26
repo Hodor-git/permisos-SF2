@@ -14,7 +14,7 @@ class PermisoType extends AbstractType
                 'years' => range(date('Y')+1, date('Y')),
                 'label' => 'Fecha de Inicio:',
                 ))
-                ->add('observaciones', 'text')
+                ->add('observaciones', 'textarea', array('label' => 'Observaciones: (Máx 200 caracteres)', 'max_length' => 200))
                 ->add('tipoPermiso', 'entity', array(
                         'class' => 'PermisoGestionBundle:TipoPermiso',
                         'property' => 'descripcion',

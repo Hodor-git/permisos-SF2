@@ -15,7 +15,7 @@ class VacacionesType extends AbstractType
                 'years' => range(date('Y')+5, date('Y')),
                 'label' => 'Fecha de Inicio:',
                 ))
-                ->add('observaciones', 'text')
+                ->add('observaciones', 'textarea', array('label' => 'Observaciones: (Máx 200 caracteres)', 'max_length' => 200))
                 ->add('diasPedidos', 'integer', array('label' => 'Días Pedidos:'));
         
     }

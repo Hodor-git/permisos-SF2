@@ -1,0 +1,39 @@
+{% extends 'PermisoAuthBundle::layout.html.twig' %}
+{% block content %}
+
+<p>Solicitud a gestionar</p>
+    
+    <div>
+        <p>Empleado: {{ solicitud.empleado.username }}</p>
+    </div>
+
+    <div>
+        <p>Fecha de inicio: {{ solicitud.fechaInicio | date('d-m-Y') }}</p>
+    </div>
+    
+    <div>
+        <p>Observaciones: {{ solicitud.observaciones }}</p>
+    </div>
+    
+    <div>
+        {% if tipo == 'Vacaciones' %}
+        <p>Número de días pedidos: {{ solicitud.diasPedidos }}</p>
+        {% else %}
+        <p>Tipo de permiso solicitado: {{ solicitud.tipoPermiso.descripcion }}</p>
+        {% endif %}
+    </div>
+
+<form novalidate="true" action="#" method="post">    
+    
+    <div>
+        <p>{{ form_label(form.resolucion) }}</p>
+        <p>{{ form_errors(form.resolucion) }}</p>
+        <p>{{ form_widget(form.resolucion) }}</p>
+    </div>
+
+    {{ form_rest(form) }}
+    <input type="submit" value='#' />
+</form>
+
+
+{% endblock %}
