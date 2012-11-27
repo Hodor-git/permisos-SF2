@@ -26,7 +26,7 @@
                 <td>{{ solicitud.diasPedidos }}</td>
                 <td>{{ solicitud.observaciones }}</td>
                 <td>{{ solicitud.resolucion }}</td>
-                <td><a href="#">Generar informe (PDF)</a></td>
+                <td><a href="{{ path('generar_pdf', {'tipo': 'Vacaciones', 'id': solicitud.id}) }}">Generar informe (PDF)</a></td>
             </tr>
         {% endfor %}
     {% else %}
@@ -57,7 +57,7 @@
                 <td>{{ permiso.tipoPermiso.descripcion }}</td>
                 <td>{{ permiso.observaciones }}</td>
                 <td>{{ permiso.resolucion }}</td>
-                <td><a href="#">Generar informe (PDF)</a></td>
+                <td><a href="{{ path('generar_pdf', {'tipo': 'Permiso', 'id': permiso.id}) }}">Generar informe (PDF)</a></td>
             </tr>
         {% endfor %}
     {% else %}

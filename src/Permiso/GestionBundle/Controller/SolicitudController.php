@@ -10,6 +10,8 @@ use Permiso\GestionBundle\Entity\Permiso;
 use Permiso\GestionBundle\Form\PermisoType;
 use Permiso\GestionBundle\Form\ResolucionType;
 
+use Ps\PdfBundle\Annotation\Pdf;
+use Symfony\Component\HttpFoundation\Response;
 
 class SolicitudController extends Controller
 {
@@ -339,6 +341,28 @@ class SolicitudController extends Controller
     {
         $this->get('mail_helper')->sendEmail('lorathlon@gmail.com', 'nerthalas@gmail.com', $resolucion, 'Resolución de su solicitud');
     }
+    
+    /**
+     * Genera un documento PDF con los principales datos de
+     * la solicitud.
+     * @Pdf()
+     */
+    public function generarPDFAction($tipo, $id)
+    {
+        $facade = $this->get('ps_pdf.facade');
+        
+        $response = new Response();
+        
+        $solicitud = $this->getRepositorio($tipo)->findOneBy(array('id' => $id));  
+        
+        $this->render('PermisoGestionBundle:Solicitud:PDFSolicitud.pdf.twig', array('solicitud' => $solicitud, 'tipo' => $tipo), $response);
+
+        $xml = $response->getContent();
+        
+        $contenido = $facade->render($xml);
+        
+        return new Response($contenido, 200, array('content-type' => 'application/pdf'));
+               
+    }
        
 }
-

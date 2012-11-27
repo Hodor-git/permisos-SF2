@@ -47,4 +47,7 @@ mostrar_solicitud:
 gestionar_solicitud:
   pattern: /empleado/gestionarSolicitud/{tipo}/{id}
   defaults: { _controller: PermisoGestionBundle:Solicitud:gestionarSolicitud }
-  
+    
+generar_pdf:
+  pattern: /empleado/generarPDF/{tipo}/{id}
+  defaults: { _controller: PermisoGestionBundle:Solicitud:generarPDF }

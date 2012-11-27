@@ -1,0 +1,15 @@
+<pdf>
+
+    <dynamic-page>
+    
+        <p>El usuario es: {{ solicitud.empleado.username }}</p>
+        
+        {% if tipo == 'Vacaciones' %}
+        <p>Número de días pedidos: {{ solicitud.diasPedidos }}</p>
+        {% else %}
+        <p>Tipo de permiso solicitado: {{ solicitud.tipoPermiso.descripcion }}</p>
+        {% endif %}
+    
+    </dynamic-page>
+    
+</pdf>
