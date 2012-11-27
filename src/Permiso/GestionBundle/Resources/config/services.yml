@@ -5,3 +5,8 @@ services:
 #    permiso_gestion.example:
 #        class: %permiso_gestion.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+
+services:
+    mail_helper:
+        class:     Permiso\GestionBundle\Utilidades\MailHelper
+        arguments: ['@mailer']

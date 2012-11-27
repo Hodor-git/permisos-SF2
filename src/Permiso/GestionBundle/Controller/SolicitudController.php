@@ -312,6 +312,8 @@ class SolicitudController extends Controller
             $this->getRepositorio($tipo)->gestionarSolicitudRepositorio(false, $resolucion['resolucion'], $solicitud);
             //Muestra un mensaje en el menú principal
             $this->get('session')->setFlash('aviso', 'Solicitud aceptada y gestionada correctamente.');
+            //Envía un correo al empleado con la resolución de la solicitud.
+            //$this->enviarCorreo();
             //Redirige al menú principal de la aplicación
             return $this->redirect($this->generateUrl('inicio_aplicacion'));
             
@@ -321,9 +323,21 @@ class SolicitudController extends Controller
             $this->getRepositorio($tipo)->gestionarSolicitudRepositorio(true, $resolucion['resolucion'], $solicitud);
             //Muestra un mensaje en el menú principal
             $this->get('session')->setFlash('aviso', 'Solicitud rechazada y gestionada correctamente.');
+            //Envía un correo al empleado con la resolución de la solicitud.
+            //$this->enviarCorreo();
             //Redirige al menú principal
             return $this->redirect($this->generateUrl('inicio_aplicacion'));
         }          
+    }
+    
+    /**
+     * Recoge una instancia de la clase MailHelper y envía un correo
+     * mediante el método sendEmail.
+     * @param String $resolucion (resolución de la solicitud)
+     */
+    private function enviarCorreo($resolucion)
+    {
+        $this->get('mail_helper')->sendEmail('lorathlon@gmail.com', 'nerthalas@gmail.com', $resolucion, 'Resolución de su solicitud');
     }
        
 }
