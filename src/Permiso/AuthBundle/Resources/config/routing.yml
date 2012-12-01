@@ -4,3 +4,7 @@ usuario_registrado:
   pattern: /registrar
   defaults: { _controller: PermisoAuthBundle:Security:registrarUsuario }
   
+mostrar_datos:
+  pattern: /mostrarDatos
+  defaults: { _controller: PermisoAuthBundle:Security:mostrarDatos }
+  

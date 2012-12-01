@@ -9,6 +9,7 @@ use Permiso\GestionBundle\Form\VacacionesType;
 use Permiso\GestionBundle\Entity\Permiso;
 use Permiso\GestionBundle\Form\PermisoType;
 use Permiso\GestionBundle\Form\ResolucionType;
+use Permiso\GestionBundle\Repositorios\GenericoRepository;
 
 use Ps\PdfBundle\Annotation\Pdf;
 use Symfony\Component\HttpFoundation\Response;
@@ -229,6 +230,7 @@ class SolicitudController extends Controller
     public function borrarSolicitudAction($tipo, $id)
     {
         $repositorio = $this->getRepositorio($tipo);
+        $repoVacaciones = $this->getRepositorio('Vacaciones');
         
         if (!$repositorio) 
         {
@@ -237,7 +239,8 @@ class SolicitudController extends Controller
         
         $solicitud = $repositorio->findOneBy(array('id' => $id));
         
-        $repositorio->borrarSolicitud($solicitud);
+        //$repositorio->borrarSolicitud($solicitud);
+        $repoVacaciones->borrarSolicitud($solicitud);
         
         //Muestra un mensaje en el menú principal
         $this->get('session')->setFlash('aviso', 'La solicitud ha sido borrada con éxito.');
@@ -340,6 +343,16 @@ class SolicitudController extends Controller
     private function enviarCorreo($resolucion)
     {
         $this->get('mail_helper')->sendEmail('lorathlon@gmail.com', 'nerthalas@gmail.com', $resolucion, 'Resolución de su solicitud');
+        
+//        try {
+//             $this->get('mailer')->send($email);
+//            }
+//            catch (\Swift_TransportException $e) {
+//            $result = array(
+//                false, 
+//                'There was a problem sending email: ' . $e->getMessage()
+//            );
+//        }
     }
     
     /**

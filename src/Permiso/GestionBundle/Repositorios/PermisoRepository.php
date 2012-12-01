@@ -33,18 +33,18 @@ class PermisoRepository extends EntityRepository
         $em->flush();
     }
     
-    /**
-     * Mediante este método se borra una solicitud 
-     * de la BDD
-     * @param type $solicitud
-     */
-    public function borrarSolicitud($solicitud)
-    {
-        $em = $this->getEntityManager();
-        
-        $em->remove($solicitud);
-        $em->flush();
-    }
+//    /**
+//     * Mediante este método se borra una solicitud 
+//     * de la BDD
+//     * @param type $solicitud
+//     */
+//    public function borrarSolicitud($solicitud)
+//    {
+//        $em = $this->getEntityManager();
+//        
+//        $em->remove($solicitud);
+//        $em->flush();
+//    }
     
     /**
      * Método para listar los permisos gestionados pendientes de aprobación.

@@ -33,32 +33,44 @@ class SecurityController extends Controller
     
     public function registrarUsuarioAction()
     {  
-        /*
+        
         $em = $this->getDoctrine()->getEntityManager();
         
-        $gestor = $em->getRepository('PermisoGestionBundle:Gestor');
+        $empleado = $em->getRepository('PermisoGestionBundle:Empleado');
         $categoria = $em->getRepository('PermisoGestionBundle:Categoria');
         
         //$pepito = $gestor->findBy(array('username' => 'pepe'));
-        $empleado = $categoria->findBy(array('nombre' => 'gestor'));
+        $tipoEmpleado = $categoria->findBy(array('nombre' => 'gestor'));
         
         $manolito = new Gestor();
         
-        $manolito->setUsername('pepito');
-        $manolito->setPassword('piscinas');
-        $manolito->setEmail('pepito@pepito.dot.com');
-        $manolito->setCategoria($empleado[0]);
+        $manolito->setUsername('javi');
+        $manolito->setPassword('montes');
+        $manolito->setEmail('montes@montes.dot.com');
+        $manolito->setCategoria($tipoEmpleado[0]);
         //$manolito->setGestor($pepito[0]);
         
-        $this->setSecurePassword($manolito);
+        //$this->setSecurePassword($manolito);
+        //$em->persist($manolito);
+        //$em->flush();
         
-        $em->persist($manolito);
-        
-        $em->flush();*/
+        $empleado->grabarEmpleado($manolito);
         
         return $this->render('PermisoGestionBundle:Solicitud:exitoBorrado.html.twig');
     }
     
+    public function mostrarDatosAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        $gestorRepo = $em->getRepository('PermisoGestionBundle:Gestor');
+        $gestorRepo->tonteria();
+        $lista = $gestorRepo->findAll();
+        
+        return $this->render('PermisoGestionBundle:Solicitud:lista.html.twig', array('lista' => $lista));
+    }
+
+
     private function setSecurePassword(&$entity) 
     {
 	$entity->setSalt(md5(time()));

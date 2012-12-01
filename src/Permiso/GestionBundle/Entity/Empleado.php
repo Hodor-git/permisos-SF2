@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Example taken from the manual.
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Permiso\GestionBundle\Repositorios\EmpleadoRepository")
  * Define Class Table Inheritance as the mapping strategy for this whole hierarchy:
  * @ORM\InheritanceType("JOINED")
  * Define the discriminator column:
