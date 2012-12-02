@@ -78,7 +78,7 @@ class SolicitudController extends Controller
             if($form->isValid())
             {
                 //Obtiene el repositorio de la entidad y guarda ésta en la persistencia
-                $this->getRepositorio('Vacaciones')->guardarVacaciones($vacaciones, $usuarioEnSesion);
+                $this->getRepositorio('Solicitud')->guardarSolicitud($vacaciones, $usuarioEnSesion);
                 
                 //Muestra un mensaje en el menú principal
                 $this->get('session')->setFlash('aviso', 'La solicitud ha sido creada y guardada con éxito.');
@@ -152,7 +152,7 @@ class SolicitudController extends Controller
             if($form->isValid())
             {
                 //Obtiene el repositorio de la entidad y guarda ésta en la persistencia
-                $this->getRepositorio('Permiso')->guardarPermiso($permiso, $usuarioEnSesion);
+                $this->getRepositorio('Solicitud')->guardarSolicitud($permiso, $usuarioEnSesion);
                 
                 //Muestra un mensaje en el menú principal
                 $this->get('session')->setFlash('aviso', 'La solicitud ha sido creada y guardada con éxito.');

@@ -5,9 +5,11 @@ namespace Permiso\GestionBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Permiso\GestionBundle\Entity\Solicitud;
 
+//(repositoryClass="Permiso\GestionBundle\Repositorios\PermisoRepository")
+
 /**
- * @ORM\Entity(repositoryClass="Permiso\GestionBundle\Repositorios\PermisoRepository")
- * @ORM\Table(name="permiso")
+ * @ORM\Entity
+ * @ORM\Table
  */
 class Permiso extends Solicitud
 {

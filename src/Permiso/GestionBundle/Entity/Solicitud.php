@@ -5,7 +5,16 @@ namespace Permiso\GestionBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/** @ORM\MappedSuperclass */
+/**
+ * Example taken from the manual.
+ * @ORM\Entity(repositoryClass="Permiso\GestionBundle\Repositorios\SolicitudRepository")
+ * Define Class Table Inheritance as the mapping strategy for this whole hierarchy:
+ * @ORM\InheritanceType("JOINED")
+ * Define the discriminator column:
+ * @ORM\DiscriminatorColumn(name="discriminador", type="string")
+ * Define a map of keys and values (class names):
+ * @ORM\DiscriminatorMap({"vacaciones" = "Vacaciones", "permiso" = "Permiso"})
+ */
 class Solicitud 
 {
     /**
