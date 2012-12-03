@@ -29,7 +29,7 @@ solicitudes_pendientes_gestion:
   defaults: { _controller: PermisoGestionBundle:Solicitud:listarSolicitudesPendientesGestion }
 
 borrar_solicitud:
-  pattern: /empleado/borrarSolicitud/{tipo}/{id}
+  pattern: /empleado/borrarSolicitud/{id}
   defaults: { _controller: PermisoGestionBundle:Solicitud:borrarSolicitud }
 
 editar_vacaciones:

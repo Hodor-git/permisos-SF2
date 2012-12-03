@@ -46,6 +46,92 @@ class SolicitudRepository extends EntityRepository
         $em->remove($solicitud);
         $em->flush();
     }
+    
+    /**
+     * Método que permite aceptar/rechazar una solicitud de un empleado
+     * por parte del gestor correspondiente.
+     * 
+     * @param type $denegada (true: solicitud rechazada / false: solicitud aceptada)
+     * @param type $resolucion (texto donde explica brevemente la decisión)
+     * @param type $solicitud (objeto a persistir en la BDD)
+     */
+    public function gestionarSolicitudRepositorio($denegada, $resolucion, $solicitud)
+    {
+        //Fecha de hoy
+        $hoy = new \DateTime("now");
+        
+        $em = $this->getEntityManager();
+        
+        $solicitud->setDenegada($denegada);
+        $solicitud->setFinalizada(TRUE);
+        $solicitud->setResolucion($resolucion);
+        $solicitud->setFechaGestion($hoy);
+        
+        $em->persist($solicitud);
+        $em->flush();
+    }
+    
+//    public function vacacionesPendientesGestionar($gestorID)
+//    {     
+//        $query = $this->getEntityManager()->createQueryBuilder();
+//        
+//        $query->select('v')
+//        ->from('Permiso\GestionBundle\Entity\Vacaciones', 'v')
+//        ->innerJoin('v.empleado', 'e')
+//        ->where('v.finalizada = ?1 AND e.gestor = ?2')
+//        ->setParameters(array (1 => false, 2 => $gestorID));
+//        
+//        $resultado = $query->getQuery()->getResult();
+//      
+//        return $resultado;       
+//    }
+//    
+//    /**
+//     * Método para listar los permisos gestionados pendientes de aprobación.
+//     * Es decir, aquellas solicitudes pertenecientes a los empleados a cargo de 
+//     * determinado gestor.
+//     * 
+//     * @param integer $gestorID
+//     * @return array listado
+//     */
+//    public function permisosPendientesGestionar($gestorID)
+//    {
+//        $query = $this->getEntityManager()->createQueryBuilder();
+//        
+//        $query->select('p')
+//        ->from('Permiso\GestionBundle\Entity\Permiso', 'p')
+//        ->innerJoin('p.empleado', 'e')
+//        ->where('p.finalizada = ?1 AND e.gestor = ?2')
+//        ->setParameters(array (1 => false, 2 => $gestorID));
+//        
+//        $resultado = $query->getQuery()->getResult();
+//      
+//        return $resultado;
+//    }
+    
+    /**
+     * Método para listar las solicitudes gestionadas pendientes de aprobación.
+     * Es decir, aquellas solicitudes pertenecientes a los empleados a cargo de 
+     * determinado gestor que no han sido todavía valoradas por éste.
+     * 
+     * @param integer $gestorID
+     * @param string $tipo (Ejemplo de tipo de solicitud: "\Permiso", "\Vacaciones")
+     * @return array listado
+     */
+    public function solicitudPendienteGestionar($gestorID, $tipo)
+    {
+        $query = $this->getEntityManager()->createQueryBuilder();
+        
+        $query->select('p')
+        ->from('Permiso\GestionBundle\Entity'.$tipo, 'p')
+        ->innerJoin('p.empleado', 'e')
+        ->where('p.finalizada = ?1 AND e.gestor = ?2')
+        ->setParameters(array (1 => false, 2 => $gestorID));
+        
+        $resultado = $query->getQuery()->getResult();
+      
+        return $resultado;
+    }
 }
 
 

@@ -202,6 +202,17 @@ class SolicitudController extends Controller
         //Obtengo la solicitud a mostrar
         $solicitud = $this->getRepositorio($tipo)->findOneBy(array('id' => $id));
         
+//        try {
+//            $solicitud = $this->getRepositorio($tipo)->findOneBy(array('id' => $id));
+//        } catch (Exception $e) {
+//            $this->render('PermisoGestionBundle:Solicitud:error.html.twig', array('error' => $e));
+//        }
+        
+        if(!$solicitud)
+        {
+            throw $this->createNotFoundException('No es posible mostrar la solicitud. Por favor, inténtelo de nuevo.');
+        }
+        
         //Obtengo la ID del usuario en sesión
         $usuarioEnSesionID = $this->getUser()->getId();
         
@@ -227,10 +238,9 @@ class SolicitudController extends Controller
         
     }
     
-    public function borrarSolicitudAction($tipo, $id)
+    public function borrarSolicitudAction($id)
     {
-        $repositorio = $this->getRepositorio($tipo);
-        $repoVacaciones = $this->getRepositorio('Vacaciones');
+        $repositorio = $this->getRepositorio('Solicitud');
         
         if (!$repositorio) 
         {
@@ -239,8 +249,7 @@ class SolicitudController extends Controller
         
         $solicitud = $repositorio->findOneBy(array('id' => $id));
         
-        //$repositorio->borrarSolicitud($solicitud);
-        $repoVacaciones->borrarSolicitud($solicitud);
+        $repositorio->borrarSolicitud($solicitud);
         
         //Muestra un mensaje en el menú principal
         $this->get('session')->setFlash('aviso', 'La solicitud ha sido borrada con éxito.');
@@ -281,19 +290,24 @@ class SolicitudController extends Controller
     
     public function listarSolicitudesPendientesGestionAction()
     {
-         //Obtiene el usuario de la sesión
-         $usuarioEnSesionID = $this->getUser()->getId();
+        //Obtiene el usuario de la sesión
+        $usuarioEnSesionID = $this->getUser()->getId();
         
-        $listaVacaciones = $this->getRepositorio('Vacaciones')->vacacionesPendientesGestionar($usuarioEnSesionID);
-        $listaPermisos = $this->getRepositorio('Permiso')->permisosPendientesGestionar($usuarioEnSesionID);
+        $solicitudRepo = $this->getRepositorio('Solicitud');
+        
+//        $listaVacaciones = $this->getRepositorio('Solicitud')->vacacionesPendientesGestionar($usuarioEnSesionID);
+//        $listaPermisos = $this->getRepositorio('Solicitud')->permisosPendientesGestionar($usuarioEnSesionID);
+        
+        $listaVacaciones = $solicitudRepo->solicitudPendienteGestionar($usuarioEnSesionID, '\Vacaciones');
+        $listaPermisos = $solicitudRepo->solicitudPendienteGestionar($usuarioEnSesionID, '\Permiso');
         
         return $this->render('PermisoGestionBundle:Solicitud:listaSolicitudesPendientesGestion.html.twig', 
                 array('vacaciones' => $listaVacaciones, 'permisos' => $listaPermisos));
     }
     
-    public function gestionarSolicitudAction($id, $tipo)
+    public function gestionarSolicitudAction($id)
     {
-        $solicitud = $this->getRepositorio($tipo)->findOneBy(array('id' => $id));
+        $solicitud = $this->getRepositorio('Solicitud')->findOneBy(array('id' => $id));
         
         //Obtiene el request
         $request = $this->getRequest();
@@ -313,8 +327,8 @@ class SolicitudController extends Controller
         //Si se ha pulsado el botón de aceptar la solicitud...
         if($this->getRequest()->request->has('aceptar'))
         {
-            //Se graba la solicitud en la BDD
-            $this->getRepositorio($tipo)->gestionarSolicitudRepositorio(false, $resolucion['resolucion'], $solicitud);
+            //Se graba la solicitud en la BDD con el campo "Denegada" igual a false
+            $this->getRepositorio('Solicitud')->gestionarSolicitudRepositorio(false, $resolucion['resolucion'], $solicitud);
             //Muestra un mensaje en el menú principal
             $this->get('session')->setFlash('aviso', 'Solicitud aceptada y gestionada correctamente.');
             //Envía un correo al empleado con la resolución de la solicitud.
@@ -324,8 +338,8 @@ class SolicitudController extends Controller
             
           //Si se ha pulsado el botón de rechazar la solicitud...  
         } else {
-            //Se graba la solicitud en la BDD
-            $this->getRepositorio($tipo)->gestionarSolicitudRepositorio(true, $resolucion['resolucion'], $solicitud);
+            //Se graba la solicitud en la BDD con el campo "Denegada" igual a true
+            $this->getRepositorio('Solicitud')->gestionarSolicitudRepositorio(true, $resolucion['resolucion'], $solicitud);
             //Muestra un mensaje en el menú principal
             $this->get('session')->setFlash('aviso', 'Solicitud rechazada y gestionada correctamente.');
             //Envía un correo al empleado con la resolución de la solicitud.

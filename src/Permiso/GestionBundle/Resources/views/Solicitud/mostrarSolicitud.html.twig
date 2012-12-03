@@ -19,7 +19,7 @@
         {% endif %}
     </div>
 
-<p><a href="{{ url('borrar_solicitud', {'tipo': tipo, 'id': solicitud.id}) }}">Borrar la solicitud</a>
+<p><a href="{{ url('borrar_solicitud', {'id': solicitud.id}) }}">Borrar la solicitud</a>
     || <a href="{{ url('inicio_aplicacion') }}">Volver al menú principal</a></p>
 
 {% endblock %}
