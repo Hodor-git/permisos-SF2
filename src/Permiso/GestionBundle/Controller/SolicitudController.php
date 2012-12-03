@@ -109,7 +109,7 @@ class SolicitudController extends Controller
             
             if($form->isValid())
             {
-                $this->getRepositorio('Vacaciones')->guardarVacaciones($vacaciones, $usuarioEnSesion);
+                $this->getRepositorio('Solicitud')->guardarSolicitud($vacaciones, $usuarioEnSesion);
                 
                 //Muestra un mensaje en el menú principal
                 $this->get('session')->setFlash('aviso', 'La solicitud ha sido editada con éxito.');
@@ -183,7 +183,7 @@ class SolicitudController extends Controller
             
             if($form->isValid())
             {
-                $this->getRepositorio('Permiso')->guardarPermiso($permiso, $usuarioEnSesion);
+                $this->getRepositorio('Solicitud')->guardarSolicitud($permiso, $usuarioEnSesion);
                 
                 //Muestra un mensaje en el menú principal
                 $this->get('session')->setFlash('aviso', 'La solicitud ha sido editada con éxito.');
@@ -218,11 +218,6 @@ class SolicitudController extends Controller
         
         //Obtengo la ID del gestor a quien corresponde gestionar la solicitud
         $gestorAsignadoID = $solicitud->getEmpleado()->getGestor()->getId();
-          
-        if(!$solicitud)
-        {
-            throw $this->createNotFoundException('No es posible mostrar la solicitud. Por favor, inténtelo de nuevo.');
-        }
         
         //Si el usuario en sesión es gestor y le corresponde a él gestionar la solicitud
         if($this->get('security.context')->isGranted('ROLE_GESTOR') && ($usuarioEnSesionID == $gestorAsignadoID))
@@ -293,11 +288,10 @@ class SolicitudController extends Controller
         //Obtiene el usuario de la sesión
         $usuarioEnSesionID = $this->getUser()->getId();
         
+        //Obtiene el repositorio
         $solicitudRepo = $this->getRepositorio('Solicitud');
         
-//        $listaVacaciones = $this->getRepositorio('Solicitud')->vacacionesPendientesGestionar($usuarioEnSesionID);
-//        $listaPermisos = $this->getRepositorio('Solicitud')->permisosPendientesGestionar($usuarioEnSesionID);
-        
+        //Recoge las solicitudes para listar
         $listaVacaciones = $solicitudRepo->solicitudPendienteGestionar($usuarioEnSesionID, '\Vacaciones');
         $listaPermisos = $solicitudRepo->solicitudPendienteGestionar($usuarioEnSesionID, '\Permiso');
         
@@ -315,6 +309,7 @@ class SolicitudController extends Controller
         //Obtiene el contenido del campo resolución dentro del formulario
         $resolucion = $request->get('resolucion');
         
+        //Si se pulsa dos veces el botón de Aceptar/Rechazar....
         if($solicitud->getFinalizada() == TRUE)
         {
             //Muestra un mensaje en el menú principal

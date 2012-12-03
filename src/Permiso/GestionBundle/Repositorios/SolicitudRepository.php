@@ -71,44 +71,6 @@ class SolicitudRepository extends EntityRepository
         $em->flush();
     }
     
-//    public function vacacionesPendientesGestionar($gestorID)
-//    {     
-//        $query = $this->getEntityManager()->createQueryBuilder();
-//        
-//        $query->select('v')
-//        ->from('Permiso\GestionBundle\Entity\Vacaciones', 'v')
-//        ->innerJoin('v.empleado', 'e')
-//        ->where('v.finalizada = ?1 AND e.gestor = ?2')
-//        ->setParameters(array (1 => false, 2 => $gestorID));
-//        
-//        $resultado = $query->getQuery()->getResult();
-//      
-//        return $resultado;       
-//    }
-//    
-//    /**
-//     * Método para listar los permisos gestionados pendientes de aprobación.
-//     * Es decir, aquellas solicitudes pertenecientes a los empleados a cargo de 
-//     * determinado gestor.
-//     * 
-//     * @param integer $gestorID
-//     * @return array listado
-//     */
-//    public function permisosPendientesGestionar($gestorID)
-//    {
-//        $query = $this->getEntityManager()->createQueryBuilder();
-//        
-//        $query->select('p')
-//        ->from('Permiso\GestionBundle\Entity\Permiso', 'p')
-//        ->innerJoin('p.empleado', 'e')
-//        ->where('p.finalizada = ?1 AND e.gestor = ?2')
-//        ->setParameters(array (1 => false, 2 => $gestorID));
-//        
-//        $resultado = $query->getQuery()->getResult();
-//      
-//        return $resultado;
-//    }
-    
     /**
      * Método para listar las solicitudes gestionadas pendientes de aprobación.
      * Es decir, aquellas solicitudes pertenecientes a los empleados a cargo de 
