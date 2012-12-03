@@ -4,6 +4,7 @@ namespace Permiso\GestionBundle\Entity;
  
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Example taken from the manual.
@@ -26,11 +27,14 @@ class Empleado implements UserInterface
     
     /**
      * @ORM\Column(name="username", type="string")
+     * @Assert\NotBlank(message = "Necesita introducir un nombre de usuario")
+     * 
      */
     protected $username;
     
     /**
      * @ORM\Column(name="password", type="string")
+     * @Assert\NotBlank(message = "Necesita introducir una contraseña")
      */
     protected $password;
     

@@ -9,7 +9,6 @@ use Permiso\GestionBundle\Form\VacacionesType;
 use Permiso\GestionBundle\Entity\Permiso;
 use Permiso\GestionBundle\Form\PermisoType;
 use Permiso\GestionBundle\Form\ResolucionType;
-use Permiso\GestionBundle\Repositorios\GenericoRepository;
 
 use Ps\PdfBundle\Annotation\Pdf;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,6 +50,10 @@ class SolicitudController extends Controller
        //Código.....
     }
     
+    /**
+     * 
+     * @return type
+     */
     public function solicitarVacacionesAction()
     {      
         //-- Obtenemos el request que contendrá los datos

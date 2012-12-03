@@ -1,0 +1,25 @@
+{% if error %}
+    <div class="alert alert-error">{{ error.message }}</div>
+{% endif %}
+<form action="{{ path('login_check') }}" method="post" class="form-inline" novalidate>
+    <table class="table">
+        <tr>
+            <td style="width: 120px;">{{ form_label(form.username) }} <span class="required">*</span></td>
+            <td style="width: 220px;">{{ form_widget(form.username) }}</td>
+            <td class="form-error" id="email_error">{{ form_errors(form.username) }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.password) }} <span class="required">*</span></td>
+            <td>{{ form_widget(form.password) }}</td>
+            <td class="form-error" id="password_error">{{ form_errors(form.password) }}</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: left;">
+                {{ form_rest(form) }}
+                <input type="reset" value="Cancel" class="btn" />
+                <input type="submit" value="Login" class="btn btn-danger" />
+            </td>
+        <td>&nbsp;</td>
+        </tr>
+    </table>
+</form>

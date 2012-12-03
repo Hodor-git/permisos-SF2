@@ -10,12 +10,17 @@ use Permiso\GestionBundle\Entity\Empleado;
 use Permiso\GestionBundle\Entity\Gestor;
 use Permiso\GestionBundle\Entity\Categoria;
 
+use Permiso\AuthBundle\Formularios\LoginType;
+
 class SecurityController extends Controller
 {
     public function loginAction()
     {
         $request = $this->getRequest();
         $session = $request->getSession();
+        
+        $empleado = new Empleado();
+        $loginForm = $this->createForm(new LoginType(), $empleado);
  
         // get the login error if there is one
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
@@ -24,11 +29,13 @@ class SecurityController extends Controller
             $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
         }
  
-        return $this->render('PermisoAuthBundle:Security:login.html.twig', array(
-            // last username entered by the user
-            'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-            'error'         => $error,
-        ));
+//        return $this->render('PermisoAuthBundle:Security:login.html.twig', array(
+//            // last username entered by the user
+//            'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+//            'error'         => $error,
+//        ));
+        
+        return $this->render('PermisoAuthBundle:Security:loginForm.html.twig', array('form' => $loginForm->createView(), 'error' => $error));
     }
     
     public function registrarUsuarioAction()

@@ -16,6 +16,7 @@
                 <th>Días solicitados</th>              
                 <th>Observaciones</th>
                 <th>Resolución</th>
+                <th>Gestionada por:</th>
             </tr>
         {% for solicitud in vacaciones %}
             <tr>
@@ -26,6 +27,7 @@
                 <td>{{ solicitud.diasPedidos }}</td>
                 <td>{{ solicitud.observaciones }}</td>
                 <td>{{ solicitud.resolucion }}</td>
+                <td>{{ solicitud.empleado.gestor.username }}</td>
                 <td><a href="{{ path('generar_pdf', {'tipo': 'Vacaciones', 'id': solicitud.id}) }}">Generar informe (PDF)</a></td>
             </tr>
         {% endfor %}
@@ -47,6 +49,7 @@
                 <th>Tipo de Permiso</th>              
                 <th>Observaciones</th>
                 <th>Resolución</th>
+                <th>Gestionado por:</th>
             </tr>
         {% for permiso in permisos %}
             <tr>
@@ -57,6 +60,7 @@
                 <td>{{ permiso.tipoPermiso.descripcion }}</td>
                 <td>{{ permiso.observaciones }}</td>
                 <td>{{ permiso.resolucion }}</td>
+                <td>{{ permiso.empleado.gestor.username }}</td>
                 <td><a href="{{ path('generar_pdf', {'tipo': 'Permiso', 'id': permiso.id}) }}">Generar informe (PDF)</a></td>
             </tr>
         {% endfor %}
