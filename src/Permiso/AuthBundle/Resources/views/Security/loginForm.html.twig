@@ -1,3 +1,6 @@
+{% extends 'PermisoAuthBundle::layout.html.twig' %}
+{% block content %}
+
 {% if error %}
     <div class="alert alert-error">{{ error.message }}</div>
 {% endif %}
@@ -23,3 +26,5 @@
         </tr>
     </table>
 </form>
+    
+{% endblock %}

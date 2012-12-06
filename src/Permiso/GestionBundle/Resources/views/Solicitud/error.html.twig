@@ -1,0 +1,14 @@
+{% extends 'PermisoAuthBundle::layout.html.twig' %}
+{% block content %}
+<h2>Se ha producido la siguiente incidencia</h2>
+        
+<br />
+{% if app.session.hasFlash('aviso') %}
+    <div class="aviso">
+        {{ app.session.flash('aviso') }}
+    </div>
+{% endif %}
+
+<p><a href="{{ url('inicio_aplicacion') }}">Volver al menú principal</a></p>
+
+{% endblock %}

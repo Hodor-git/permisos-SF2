@@ -94,6 +94,26 @@ class SolicitudRepository extends EntityRepository
       
         return $resultado;
     }
+    
+    /**
+     * Devuelve los días de vacaciones consumidos por el empleado
+     * @param type $empleado
+     * @return type
+     */
+    public function diasVacacionesConsumidosPorEmpleado($empleado)
+    {
+        
+        $query = $this->getEntityManager()->createQueryBuilder();
+        
+        $query->select('SUM(v.diasPedidos)')
+                ->from('Permiso\GestionBundle\Entity\Vacaciones', 'v')
+                ->where('v.empleado = ?1 AND v.denegada = ?2')
+                ->setParameters(array (1 => $empleado, 2 => FALSE));
+        
+        $resultado = $query->getQuery()->getResult();
+        
+        return $resultado[0][1];
+    }
 }
 
 

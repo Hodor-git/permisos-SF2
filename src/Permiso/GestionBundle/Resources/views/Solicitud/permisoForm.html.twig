@@ -29,6 +29,13 @@
     {{ form_rest(form) }}
     <input type="submit" value='{{ valorSubmit }}' />
 </form>
+        
+<br />
+{% if app.session.hasFlash('aviso') %}
+    <div class="aviso">
+        {{ app.session.flash('aviso') }}
+    </div>
+{% endif %}
 
 <p><a href="{{ url('inicio_aplicacion') }}">Volver al menú principal</a></p>
 
