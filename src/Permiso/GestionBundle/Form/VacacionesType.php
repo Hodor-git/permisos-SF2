@@ -1,9 +1,10 @@
 <?php
 
 namespace Permiso\GestionBundle\Form;
+
 use Symfony\Component\Form\AbstractType;
-//use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\Form\FormBuilderInterface; 
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class VacacionesType extends AbstractType
 {
@@ -18,6 +19,15 @@ class VacacionesType extends AbstractType
                 ->add('observaciones', 'textarea', array('label' => 'Observaciones: (Máx 200 caracteres)', 'max_length' => 200))
                 ->add('diasPedidos', 'integer', array('label' => 'Días Pedidos:'));
         
+    }
+    
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        parent::setDefaultOptions($resolver);
+
+        $resolver->setDefaults(array(
+            'data_class' => 'Permiso\GestionBundle\Entity\Solicitud',
+        ));
     }
     
     public function getName()

@@ -1,8 +1,10 @@
 <?php
 
 namespace Permiso\GestionBundle\Form;
+
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface; 
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class PermisoType extends AbstractType
 {
@@ -20,6 +22,15 @@ class PermisoType extends AbstractType
                         'property' => 'descripcion',
                 ));
         
+    }
+    
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        parent::setDefaultOptions($resolver);
+
+        $resolver->setDefaults(array(
+            'data_class' => 'Permiso\GestionBundle\Entity\Solicitud',
+        ));
     }
     
     public function getName()

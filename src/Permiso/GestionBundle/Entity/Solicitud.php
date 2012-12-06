@@ -4,6 +4,7 @@ namespace Permiso\GestionBundle\Entity;
  
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ExecutionContext;
 
 /**
  * Example taken from the manual.
@@ -14,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\DiscriminatorColumn(name="discriminador", type="string")
  * Define a map of keys and values (class names):
  * @ORM\DiscriminatorMap({"vacaciones" = "Vacaciones", "permiso" = "Permiso"})
+ * @Assert\Callback(methods = { "isFechaInicioValida" })
  */
 class Solicitud 
 {
@@ -67,7 +69,15 @@ class Solicitud
      * @return integer
      */
     protected $empleado;
-
+    
+    
+    public function isFechaInicioValida(ExecutionContext $context)
+    {
+        if ($this->fechaInicio <= new \DateTime()) {
+            $context->addViolationAtSubPath('fechaInicio', 'La fecha de inicio ha de ser futura.');
+        }
+    }
+    
     /**
      * Get id
      *
