@@ -70,7 +70,10 @@ class Solicitud
      */
     protected $empleado;
     
-    
+    /**
+     * Comprueba si la fecha de inicio es futura
+     * @param \Symfony\Component\Validator\ExecutionContext $context
+     */
     public function isFechaInicioValida(ExecutionContext $context)
     {
         if ($this->fechaInicio <= new \DateTime()) {
